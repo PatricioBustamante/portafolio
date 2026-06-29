@@ -38,11 +38,12 @@
   }
 
   function sendBeaconMsg(text) {
-    const blob = new Blob(
-      [JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })],
-      { type: 'application/json' }
-    );
-    navigator.sendBeacon(API, blob);
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
+      keepalive: true
+    }).catch(() => {});
   }
 
   // ── Notificación de llegada ────────────────────
