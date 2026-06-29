@@ -293,6 +293,29 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.page-hero-summary {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink-soft);
+  margin-top: var(--space-4);
+  max-width: 60ch;
+  opacity: 0;
+  transform: translateY(var(--space-2));
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.9s forwards;
+}
+.page-hero-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-mute);
+  text-align: right;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding-bottom: var(--space-1);
+}
 
 /* ===== Projects · sección de la lista de proyectos ===== */
 .projects-section { padding-bottom: var(--space-10); }
@@ -454,6 +477,18 @@
 }
 /* Cubierta clara (preview-3) necesita texto oscuro */
 .project-cover.preview-3 .project-cover-title { color: #2a1f10; }
+/* Cuando hay imagen real, escala al ancho del contenedor y oculta el texto */
+.project-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.project-cover:has(img) {
+  aspect-ratio: auto;
+  height: auto;
+  align-items: stretch;
+}
+.project-cover:has(img) .project-cover-title { display: none; }
 
 .project-intro {
   display: grid;
@@ -1042,14 +1077,19 @@
 
 /* ── Info del proyecto · grid de 4 datos ── */
 .pj-info {
-  border-top: 1px solid var(--color-line);
+  margin-top: var(--space-6);
 }
 .pj-info-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--color-line);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
 }
 .pj-info-item {
+  background: var(--color-bg);
+  padding: var(--space-3) var(--space-3) var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -1067,6 +1107,127 @@
   font-weight: var(--weight-medium);
 }
 
+/* ── pj-body · contenedor de bloques numerados ── */
+.pj-body {
+  padding: var(--section-py) var(--container-px) 0;
+}
+
+/* ── pj-block · bloque con índice lateral ── */
+.pj-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-10);
+  border-top: 1px solid var(--color-line);
+}
+.pj-block:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+@media (min-width: 860px) {
+  .pj-block {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-10);
+  }
+}
+
+.pj-block-index {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  align-self: start;
+}
+
+@media (min-width: 860px) {
+  .pj-block-index {
+    flex-direction: column;
+    gap: var(--space-2);
+    position: sticky;
+    top: var(--space-10);
+  }
+}
+
+.pj-block-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent);
+}
+
+.pj-block-kicker {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+.pj-block-body {
+  max-width: 62ch;
+}
+
+.pj-block-heading {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+.pj-block-heading:empty { display: none; }
+
+.pj-block-text {
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--color-ink-soft);
+}
+
+.pj-block-text + .pj-block-text {
+  margin-top: var(--space-4);
+}
+
+.pj-block-text p + p {
+  margin-top: var(--space-4);
+}
+
+/* ── analysis-list · lista numerada enriquecida ── */
+.analysis-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  display: flex;
+  flex-direction: column;
+  counter-reset: analysis-counter;
+}
+.analysis-list li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-2);
+  counter-increment: analysis-counter;
+  line-height: var(--leading-loose);
+  color: var(--color-ink-soft);
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--color-line);
+}
+.analysis-list li:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+.analysis-list li::before {
+  content: counter(analysis-counter);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-mute);
+  padding-top: 0.3em;
+}
+.analysis-list-label {
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
 /* ── Objetivo principal ── */
 .pj-main-objective {
   font-size: var(--text-lg);
@@ -1082,6 +1243,51 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-8);
   margin-top: var(--space-8);
+}
+
+/* ── Galería de imágenes ── */
+.pj-images--hidden { display: none; }
+.pj-images-ph {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-bg-soft) 0 14px,
+    var(--color-bg) 14px 28px
+  );
+}
+.pj-images:has(.pj-images-grid:not(:empty)) .pj-images-ph { display: none; }
+.pj-images-grid:empty { display: none; }
+.pj-images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+.pj-image-item {
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg-soft);
+}
+.pj-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pj-embed-item {
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg-soft);
+  grid-column: 1 / -1;
+}
+.pj-embed-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 /* ── Métricas · grid de cards ── */

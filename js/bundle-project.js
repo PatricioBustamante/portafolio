@@ -79,105 +79,6 @@ if (!customElements.get('site-footer')) {
   customElements.define('site-footer', SiteFooter);
 }
 /* ============================================
-   PROJECTS DATA · fuente única de los proyectos
-   ----------------------------------------------
-   Estructura por proyecto:
-     num, preview, recentProject, visibleProject
-     company, initial, title, category, year
-     client, role, tags, summary
-     challenge          → Desafío
-     mainObjective      → Objetivo principal
-     objectives[]       → Objetivos secundarios
-     solution           → Solución
-     processes[]        → Procesos realizados
-     tools[]            → Herramientas utilizadas
-     metrics[]          → { label, value, before, after, change }
-     lessons[]          → Aprendizajes
-   ============================================ */
-
-window.PROJECTS = {
-
-  'betterfly-onboarding': {
-    num: '011', preview: 4,
-    recentProject: true, visibleProject: true,
-    company: 'Betterfly', initial: 'Bt',
-    title: 'Onboarding / Enrolamiento', category: 'Insurtech', year: '2021',
-    client: 'Betterfly',
-    role: 'Product Designer',
-    tags: ['Insurtech', 'Móvil', 'UX Research'],
-    summary: 'Rediseño del flujo de enrolamiento para usuarios nuevos de seguro digital, reduciendo el abandono de 65% a 10% y el tiempo de completado de 12 a 5 minutos.',
-
-    challenge: 'Mejorar el tiempo en que los usuarios completan el onboarding del producto, optimizando la comprensión del proceso y reduciendo el abandono durante el flujo.',
-
-    mainObjective: 'Aumentar el número de usuarios que completen exitosamente el proceso de enrolamiento, asegurando una comprensión clara del producto contratado a través de sus empleadores.',
-
-    objectives: [
-      'Incrementar la comprensión de los beneficios y funcionalidades del producto durante el proceso de onboarding, mediante contenidos claros y contextualizados para cada tipo de usuario.',
-      'Reducir los puntos de fricción dentro del flujo de enrolamiento, simplificando tareas, formularios y validaciones para disminuir el abandono del proceso.',
-      'Mejorar la orientación y confianza de los usuarios durante el onboarding, incorporando ayudas visuales, feedback en tiempo real y estados de progreso claros.'
-    ],
-
-    solution: 'Se diseñó un proceso claro y transparente que explicaba de manera simple los productos incluidos en el plan, optimizando además el flujo mediante la reducción de pasos. Esto permitió disminuir en un 90% la cantidad de usuarios que abandonaban el proceso.',
-
-    processes: [
-      'Análisis completo del proceso de onboarding para detectar puntos de fricción, pasos innecesarios y momentos críticos donde los usuarios abandonaban el flujo.',
-      'Optimización de la estructura del onboarding reduciendo la cantidad de pasos, acciones y decisiones que el usuario debía completar.',
-      'Rediseño de la presentación de la información para explicar de manera clara y transparente los beneficios y productos incluidos en el plan contratado.',
-      'Pruebas de usabilidad y seguimiento de métricas clave para evaluar el comportamiento de los usuarios e iterar mejoras continuas.'
-    ],
-
-    tools: [
-      'Figma',
-      'Google Analytics',
-      'Hotjar',
-      'Maze',
-      'Jira'
-    ],
-
-    metrics: [
-      {
-        label: 'Tasa de finalización',
-        value: '+43pp',
-        before: '35%',
-        after: '78%',
-        change: '+43%'
-      },
-      {
-        label: 'Abandono del flujo',
-        value: '−55pp',
-        before: '65%',
-        after: '10%',
-        change: '−85%'
-      },
-      {
-        label: 'Tiempo de enrolamiento',
-        value: '−58%',
-        before: '12 min',
-        after: '5 min',
-        change: '−58%'
-      },
-      {
-        label: 'Comprensión del producto',
-        value: '+40pp',
-        before: '45%',
-        after: '85%',
-        change: '+40%'
-      }
-    ],
-
-    lessons: [
-      'El diseño centrado en el usuario puede impactar directamente tanto en la experiencia como en los objetivos de negocio.',
-      'A través de research, análisis de comportamiento y validación continua, es posible identificar fricciones clave y transformarlas en oportunidades de mejora.',
-      'La simplificación del flujo y una comunicación más clara del producto aumentan la confianza del usuario y reducen significativamente el abandono del proceso.',
-      'El trabajo colaborativo con equipos multidisciplinarios es fundamental para construir soluciones escalables, alineadas con las necesidades del usuario y los objetivos estratégicos.'
-    ]
-  },
-
-};
-
-/* Lista ordenada de slugs para navegación "siguiente proyecto". */
-window.PROJECT_ORDER = Object.keys(window.PROJECTS);
-/* ============================================
    <project-card>  · custom element
    Renders a project row in light DOM so existing
    CSS selectors and main.js queries keep working.
@@ -264,18 +165,48 @@ if (!customElements.get('project-card')) {
   };
 
   // ── Texto plano ──────────────────────────────
-  set('num',           p.num);
-  set('category',      p.category);
-  set('title',         p.title);
-  set('title2',        p.title);
-  set('title-cover',   p.title);
-  set('year',          p.year);
-  set('year2',         p.year);
-  set('client',        p.client);
-  set('role',          p.role);
-  set('challenge',     p.challenge);
-  set('mainObjective', p.mainObjective || '');
-  set('solution',      p.solution);
+  set('num',        p.num);
+  set('category',   p.category);
+  set('title',      p.title);
+  set('hero-title', p.heroTitle || p.title);
+  set('title-cover', p.title);
+  set('year',       p.year);
+  set('summary',    p.summary || '');
+  set('role',       p.role || '');
+  set('focus',      p.focus || '');
+  set('platform',   p.platform || '');
+  set('context',         p.context || '');
+  set('challenge-title', p.challengeTitle || '');
+  set('challenge',       p.challenge);
+  set('analysis-title',  p.analysisTitle || '');
+
+  // ── Analysis: renderiza párrafos e ítems numerados con estilo ──
+  const analysisEl = document.querySelector('[data-pj="analysis"]');
+  if (analysisEl && p.analysis) {
+    const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const lines = p.analysis.split('\n').filter(l => l.trim());
+    const numRe = /^(\d+)\.\s+(.+)$/;
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(numRe);
+      if (m) {
+        if (!inList) { html += '<ol class="analysis-list">'; inList = true; }
+        const body = m[2];
+        const dashIdx = body.indexOf(' — ');
+        if (dashIdx !== -1) {
+          html += `<li><span><strong class="analysis-list-label">${esc(body.slice(0, dashIdx))}</strong> — ${bold(body.slice(dashIdx + 3))}</span></li>`;
+        } else {
+          html += `<li><span>${bold(body)}</span></li>`;
+        }
+      } else {
+        if (inList) { html += '</ol>'; inList = false; }
+        html += `<p>${bold(line)}</p>`;
+      }
+    }
+    if (inList) html += '</ol>';
+    analysisEl.innerHTML = html;
+  }
 
   // ── Company badge ────────────────────────────
   set('company',         p.company || '');
@@ -288,32 +219,35 @@ if (!customElements.get('project-card')) {
   const desc = document.querySelector('meta[name="description"]');
   if (desc) desc.setAttribute('content', p.summary || p.challenge);
 
-  // ── Cover gradient ───────────────────────────
+  // ── Cover ────────────────────────────────────
   const cover = document.getElementById('pj-cover');
-  if (cover && p.preview) cover.classList.add('preview-' + p.preview);
-
-  // ── Objetivos secundarios ────────────────────
-  const objectivesHost = document.querySelector('[data-pj="objectives"]');
-  if (objectivesHost && Array.isArray(p.objectives)) {
-    objectivesHost.innerHTML = p.objectives
-      .map(o => `<li class="pj-list-item">${esc(o)}</li>`)
-      .join('');
+  if (cover) {
+    if (p.coverImage) {
+      const img = document.createElement('img');
+      img.src = p.coverImage;
+      img.alt = p.title;
+      img.loading = 'lazy';
+      cover.prepend(img);
+    } else if (p.preview) {
+      cover.classList.add('preview-' + p.preview);
+    }
   }
 
-  // ── Procesos ─────────────────────────────────
-  const processesHost = document.querySelector('[data-pj="processes"]');
-  if (processesHost && Array.isArray(p.processes)) {
-    processesHost.innerHTML = p.processes
-      .map(o => `<li class="pj-list-item">${esc(o)}</li>`)
-      .join('');
-  }
-
-  // ── Herramientas ─────────────────────────────
-  const toolsHost = document.querySelector('[data-pj="tools"]');
-  if (toolsHost && Array.isArray(p.tools)) {
-    toolsHost.innerHTML = p.tools
-      .map(t => `<li class="pj-list-item">${esc(t)}</li>`)
-      .join('');
+  // ── Imágenes + Embeds ────────────────────────
+  const imagesHost = document.querySelector('[data-pj="images"]');
+  if (imagesHost) {
+    const items = [];
+    if (Array.isArray(p.images) && p.images.length > 0) {
+      items.push(...p.images.map(src =>
+        `<div class="pj-image-item"><img src="${esc(src)}" alt="" loading="lazy"></div>`
+      ));
+    }
+    if (Array.isArray(p.embeds) && p.embeds.length > 0) {
+      items.push(...p.embeds.map(url =>
+        `<div class="pj-embed-item"><iframe src="${esc(url)}" allowfullscreen loading="lazy"></iframe></div>`
+      ));
+    }
+    if (items.length > 0) imagesHost.innerHTML = items.join('');
   }
 
   // ── Métricas ─────────────────────────────────
@@ -329,14 +263,6 @@ if (!customElements.get('project-card')) {
         </div>
         <div class="pj-metric-change">${esc(m.change)}</div>
       </div>`).join('');
-  }
-
-  // ── Aprendizajes ─────────────────────────────
-  const lessonsHost = document.querySelector('[data-pj="lessons"]');
-  if (lessonsHost && Array.isArray(p.lessons)) {
-    lessonsHost.innerHTML = p.lessons
-      .map(l => `<li class="pj-list-item">${esc(l)}</li>`)
-      .join('');
   }
 
   // ── Siguiente proyecto (cíclico) ─────────────

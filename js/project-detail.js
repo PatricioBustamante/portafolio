@@ -21,18 +21,48 @@
   };
 
   // ── Texto plano ──────────────────────────────
-  set('num',           p.num);
-  set('category',      p.category);
-  set('title',         p.title);
-  set('title2',        p.title);
-  set('title-cover',   p.title);
-  set('year',          p.year);
-  set('year2',         p.year);
-  set('client',        p.client);
-  set('role',          p.role);
-  set('challenge',     p.challenge);
-  set('mainObjective', p.mainObjective || '');
-  set('solution',      p.solution);
+  set('num',        p.num);
+  set('category',   p.category);
+  set('title',      p.title);
+  set('hero-title', p.heroTitle || p.title);
+  set('title-cover', p.title);
+  set('year',       p.year);
+  set('summary',    p.summary || '');
+  set('role',       p.role || '');
+  set('focus',      p.focus || '');
+  set('platform',   p.platform || '');
+  set('context',         p.context || '');
+  set('challenge-title', p.challengeTitle || '');
+  set('challenge',       p.challenge);
+  set('analysis-title',  p.analysisTitle || '');
+
+  // ── Analysis: renderiza párrafos e ítems numerados con estilo ──
+  const analysisEl = document.querySelector('[data-pj="analysis"]');
+  if (analysisEl && p.analysis) {
+    const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const lines = p.analysis.split('\n').filter(l => l.trim());
+    const numRe = /^(\d+)\.\s+(.+)$/;
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(numRe);
+      if (m) {
+        if (!inList) { html += '<ol class="analysis-list">'; inList = true; }
+        const body = m[2];
+        const dashIdx = body.indexOf(' — ');
+        if (dashIdx !== -1) {
+          html += `<li><span><strong class="analysis-list-label">${esc(body.slice(0, dashIdx))}</strong> — ${bold(body.slice(dashIdx + 3))}</span></li>`;
+        } else {
+          html += `<li><span>${bold(body)}</span></li>`;
+        }
+      } else {
+        if (inList) { html += '</ol>'; inList = false; }
+        html += `<p>${bold(line)}</p>`;
+      }
+    }
+    if (inList) html += '</ol>';
+    analysisEl.innerHTML = html;
+  }
 
   // ── Company badge ────────────────────────────
   set('company',         p.company || '');
@@ -45,32 +75,35 @@
   const desc = document.querySelector('meta[name="description"]');
   if (desc) desc.setAttribute('content', p.summary || p.challenge);
 
-  // ── Cover gradient ───────────────────────────
+  // ── Cover ────────────────────────────────────
   const cover = document.getElementById('pj-cover');
-  if (cover && p.preview) cover.classList.add('preview-' + p.preview);
-
-  // ── Objetivos secundarios ────────────────────
-  const objectivesHost = document.querySelector('[data-pj="objectives"]');
-  if (objectivesHost && Array.isArray(p.objectives)) {
-    objectivesHost.innerHTML = p.objectives
-      .map(o => `<li class="pj-list-item">${esc(o)}</li>`)
-      .join('');
+  if (cover) {
+    if (p.coverImage) {
+      const img = document.createElement('img');
+      img.src = p.coverImage;
+      img.alt = p.title;
+      img.loading = 'lazy';
+      cover.prepend(img);
+    } else if (p.preview) {
+      cover.classList.add('preview-' + p.preview);
+    }
   }
 
-  // ── Procesos ─────────────────────────────────
-  const processesHost = document.querySelector('[data-pj="processes"]');
-  if (processesHost && Array.isArray(p.processes)) {
-    processesHost.innerHTML = p.processes
-      .map(o => `<li class="pj-list-item">${esc(o)}</li>`)
-      .join('');
-  }
-
-  // ── Herramientas ─────────────────────────────
-  const toolsHost = document.querySelector('[data-pj="tools"]');
-  if (toolsHost && Array.isArray(p.tools)) {
-    toolsHost.innerHTML = p.tools
-      .map(t => `<li class="pj-list-item">${esc(t)}</li>`)
-      .join('');
+  // ── Imágenes + Embeds ────────────────────────
+  const imagesHost = document.querySelector('[data-pj="images"]');
+  if (imagesHost) {
+    const items = [];
+    if (Array.isArray(p.images) && p.images.length > 0) {
+      items.push(...p.images.map(src =>
+        `<div class="pj-image-item"><img src="${esc(src)}" alt="" loading="lazy"></div>`
+      ));
+    }
+    if (Array.isArray(p.embeds) && p.embeds.length > 0) {
+      items.push(...p.embeds.map(url =>
+        `<div class="pj-embed-item"><iframe src="${esc(url)}" allowfullscreen loading="lazy"></iframe></div>`
+      ));
+    }
+    if (items.length > 0) imagesHost.innerHTML = items.join('');
   }
 
   // ── Métricas ─────────────────────────────────
@@ -86,14 +119,6 @@
         </div>
         <div class="pj-metric-change">${esc(m.change)}</div>
       </div>`).join('');
-  }
-
-  // ── Aprendizajes ─────────────────────────────
-  const lessonsHost = document.querySelector('[data-pj="lessons"]');
-  if (lessonsHost && Array.isArray(p.lessons)) {
-    lessonsHost.innerHTML = p.lessons
-      .map(l => `<li class="pj-list-item">${esc(l)}</li>`)
-      .join('');
   }
 
   // ── Siguiente proyecto (cíclico) ─────────────

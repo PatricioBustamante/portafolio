@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git restore *)"
+      "Bash(git restore *)",
+      "Bash(bash build.sh)",
+      "Bash(bash /Users/patriciobustamante/Documents/Repositories/Portafolio/build.sh)"
     ]
   }
 }
