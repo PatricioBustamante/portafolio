@@ -242,7 +242,7 @@ section {
   .project-outcome { padding: var(--section-py-mobile) var(--container-px-mobile); }
   .outcome-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   .project-next { padding: var(--space-8) var(--container-px-mobile); }
-  .pj-info-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .pj-info-grid { grid-template-columns: repeat(2, 1fr); }
   .pj-two-col { grid-template-columns: 1fr; gap: var(--space-6); }
   .pj-metrics-grid {
     grid-template-columns: 1fr 1fr;
@@ -261,6 +261,6 @@ section {
     gap: var(--space-3);
   }
   .project-meta-grid { grid-template-columns: 1fr; }
-  .pj-info-grid { grid-template-columns: 1fr; }
+  .pj-info-grid { grid-template-columns: repeat(2, 1fr); }
   .pj-metrics-grid { grid-template-columns: 1fr; }
 }

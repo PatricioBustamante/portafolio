@@ -39,12 +39,41 @@ window.PROJECTS = {
       'https://embed.figma.com/design/ZuAdzH4NYtO1B24RbePyO7/Portafolio-Docs?node-id=1-12667&embed-host=share'
     ],
 
-    metrics: []
+    metrics: [
+      {
+        label: 'Tiempo de aprobación de anticipo',
+        value: '−97%',
+        before: '3 días',
+        after: '2 horas',
+        change: '−97%'
+      },
+      {
+        label: 'Adopción de trabajadores (30 días)',
+        value: '+58pp',
+        before: '0%',
+        after: '58%',
+        change: '+58pp'
+      },
+      {
+        label: 'Carga operativa de RRHH',
+        value: '−72%',
+        before: '7 h/sem',
+        after: '1.9 h/sem',
+        change: '−72%'
+      },
+      {
+        label: 'Solicitudes sin incidencias',
+        value: '96%',
+        before: '—',
+        after: '96%',
+        change: '—'
+      }
+    ]
   },
 
   'caja-los-andes': {
     num: '04', preview: 4,
-    coverImage: '../assets/projects/caja-los-andes/cover-caja-los-andes.png',
+    coverImage: '../assets/projects/dsl-cla/cover-dls.png',
     recentProject: true, visibleProject: true,
     company: 'Caja Los Andes', initial: 'CA',
     title: 'Design System Library', category: 'Design Systems', year: '2023',
@@ -64,14 +93,45 @@ window.PROJECTS = {
     analysisTitle: '¿Cómo analizamos el problema y qué factores se tomaron en consideración para tomar las decisiones?',
     analysis: 'El proyecto involucraba tres actores con objetivos distintos: los **diseñadores** requerían herramientas ágiles para crear productos rápidamente, la **operación** buscaba mantener consistencia y control de calidad, y el **negocio** necesitaba escalar sin incrementar costos de mantenimiento. El análisis partió de equilibrar estas tensiones.\nLa decisión clave fue determinar si el Sistema de Diseño sería centralizado o **federado**, y qué nivel de autonomía tendrían los diseñadores para contribuir. Esta definición estructuró la arquitectura del sistema y la experiencia de los usuarios internos.\nPosteriormente evaluamos:\n1. Lineamientos de marca — Los estándares corporativos establecen límites visuales y experienciales, definiendo el alcance de variaciones permitidas en componentes.\n2. Accesibilidad — Se evaluaron escenarios de inclusión para garantizar que los componentes cumplieran con WCAG, estableciendo estándares mínimos y validaciones.\n3. Especificación de componentes — Propiedades, variantes y estados se definieron tras resolver restricciones de marca y accesibilidad.\n4. Gestión colaborativa — La estructura federada (protocolo de contribución, soporte y mitigación de errores) define cómo los diseñadores aportan al sistema.\n5. Arquitectura técnica — Alineación con Atomic Design y sistemas heredados para garantizar coherencia y escalabilidad.\nSe priorizó que los lineamientos de marca y la accesibilidad definiesen los límites del sistema antes de diseñar la experiencia de los diseñadores.',
 
-    embeds: [],
+    embeds: [
+      'https://embed.figma.com/design/ZuAdzH4NYtO1B24RbePyO7/Portafolio-Docs?node-id=37-34153&embed-host=share" allowfullscreen'
+    ],
 
-    metrics: []
+    metrics: [
+      {
+        label: 'Tiempo de maquetado por pantalla',
+        value: '−65%',
+        before: '~3 días',
+        after: '~1 día',
+        change: '−65%'
+      },
+      {
+        label: 'Componentes con WCAG AA',
+        value: '100%',
+        before: '0%',
+        after: '100%',
+        change: '+100pp'
+      },
+      {
+        label: 'Productos activos en el sistema',
+        value: '6 productos',
+        before: '0',
+        after: '6',
+        change: '—'
+      },
+      {
+        label: 'Inconsistencias de diseño eliminadas',
+        value: '−80%',
+        before: '40+ issues',
+        after: '<8 issues',
+        change: '−80%'
+      }
+    ]
   },
 
   'monte-de-piedad': {
     num: '03', preview: 4,
-    coverImage: '../assets/projects/monte-de-piedad/cover-monte-de-piedad.png',
+    coverImage: '../assets/projects/wp-nmp/cover-nmp.png',
     recentProject: true, visibleProject: true,
     company: 'Nacional Monte de Piedad', initial: 'NM',
     title: 'Sitio Web Privado', category: 'Fintech · Servicios Prendarios', year: '2021',
@@ -91,9 +151,40 @@ window.PROJECTS = {
     analysisTitle: '¿Cómo analizamos el problema y qué factores se tomaron en consideración para tomar las decisiones?',
     analysis: 'El proyecto involucraba tres actores con objetivos distintos: los **usuarios** requerían acceso ágil a sus servicios, la **operación** buscaba digitalizar manteniendo control, y el **negocio** necesitaba escalar sin incrementar costos. El análisis partió de equilibrar estas tensiones.\nLa decisión clave fue determinar qué operaciones podían automatizarse completamente en la plataforma y cuáles requerían validación operativa. Esta definición estructuró la arquitectura técnica y la experiencia de usuario.\nPosteriormente evaluamos:\n1. Marco regulatorio — Las normativas financieras mexicanas establecen límites sobre qué operaciones pueden automatizarse, definiendo el alcance funcional de la plataforma.\n2. Gestión de riesgo — Se evaluaron escenarios de discrepancias en datos de prendas, pagos y reempeños para establecer validaciones, límites transaccionales y controles.\n3. Especificación de servicios — Montos, tiempos de procesamiento y procedimientos se definieron tras resolver restricciones legales y de riesgo.\n4. Gestión de estados — El ciclo de vida de cada operación (solicitud, procesamiento, completada, etc.) estructura tanto el backoffice como el historial del usuario.\n5. Integración técnica — Alineación con sistemas heredados y experiencia digital coherente en la plataforma.\nSe priorizó que la regulación y la gestión de riesgo definiesen los límites operativos antes de diseñar la experiencia de usuario.',
 
-    embeds: [],
+    embeds: [
+      'https://embed.figma.com/design/ZuAdzH4NYtO1B24RbePyO7/Portafolio-Docs?node-id=27-15999&embed-host=share'
+    ],
 
-    metrics: []
+    metrics: [
+      {
+        label: 'Tiempo de gestión por operación',
+        value: '−92%',
+        before: '~60 min',
+        after: '~5 min',
+        change: '−92%'
+      },
+      {
+        label: 'Servicios sin visita a sucursal',
+        value: '5 servicios',
+        before: '0 de 5',
+        after: '5 de 5',
+        change: '+100%'
+      },
+      {
+        label: 'Usuarios registrados (6 meses)',
+        value: '+1.1M',
+        before: '0',
+        after: '1.1M',
+        change: '—'
+      },
+      {
+        label: 'Demanda presencial reducida',
+        value: '−38%',
+        before: '100% presencial',
+        after: '62% presencial',
+        change: '−38%'
+      }
+    ]
   },
 
   'betterfly-onboarding': {

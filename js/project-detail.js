@@ -33,8 +33,29 @@
   set('platform',   p.platform || '');
   set('context',         p.context || '');
   set('challenge-title', p.challengeTitle || '');
-  set('challenge',       p.challenge);
   set('analysis-title',  p.analysisTitle || '');
+
+  // ── Challenge: renderiza párrafos e ítems numerados con estilo ──
+  const challengeEl = document.querySelector('[data-pj="challenge"]');
+  if (challengeEl && p.challenge) {
+    const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const lines = p.challenge.split('\n').filter(l => l.trim());
+    const numRe = /^(\d+)\.\s+(.+)$/;
+    let html = '';
+    let inList = false;
+    for (const line of lines) {
+      const m = line.match(numRe);
+      if (m) {
+        if (!inList) { html += '<ol class="analysis-list">'; inList = true; }
+        html += `<li><span>${bold(m[2])}</span></li>`;
+      } else {
+        if (inList) { html += '</ol>'; inList = false; }
+        html += `<p>${bold(line)}</p>`;
+      }
+    }
+    if (inList) html += '</ol>';
+    challengeEl.innerHTML = html;
+  }
 
   // ── Analysis: renderiza párrafos e ítems numerados con estilo ──
   const analysisEl = document.querySelector('[data-pj="analysis"]');
