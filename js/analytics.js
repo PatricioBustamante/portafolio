@@ -1,12 +1,14 @@
 /* ============================================
-   VISITOR ANALYTICS · Telegram via Cloudflare Worker
+   VISITOR ANALYTICS · Telegram notifications
    ============================================ */
 
 (function () {
-  const WORKER_URL = 'TU_WORKER_URL'; // ← reemplazar tras crear el Worker
+  const TOKEN   = '8838023140:AAE6SK2IB1xmSq21JuqTSGyiGDk-aGNCGoQ';
+  const CHAT_ID = '339864667';
 
   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
 
+  const API       = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
   const startTime = Date.now();
   let exitSent    = false;
 
@@ -28,19 +30,19 @@
   }
 
   function send(text) {
-    fetch(WORKER_URL, {
+    fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text })
+      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })
     }).catch(() => {});
   }
 
   function sendBeaconMsg(text) {
     const blob = new Blob(
-      [JSON.stringify({ text })],
+      [JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })],
       { type: 'application/json' }
     );
-    navigator.sendBeacon(WORKER_URL, blob);
+    navigator.sendBeacon(API, blob);
   }
 
   // ── Notificación de llegada ────────────────────
