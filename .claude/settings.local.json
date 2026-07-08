@@ -3,7 +3,11 @@
     "allow": [
       "Bash(git restore *)",
       "Bash(bash build.sh)",
-      "Bash(bash /Users/patriciobustamante/Documents/Repositories/Portafolio/build.sh)"
+      "Bash(bash /Users/patriciobustamante/Documents/Repositories/Portafolio/build.sh)",
+      "Bash(python3 -m http.server 8123)",
+      "Bash(curl -s -o /dev/null -w \"index.html → HTTP %{http_code}\\\\n\" http://localhost:8123/index.html)",
+      "Bash(curl -s -o /dev/null -w \"about.html → HTTP %{http_code}\\\\n\" http://localhost:8123/pages/about.html)",
+      "Bash(curl -s -o /dev/null -w \"i18n.js   → HTTP %{http_code}\\\\n\" http://localhost:8123/js/i18n.js)"
     ]
   }
 }

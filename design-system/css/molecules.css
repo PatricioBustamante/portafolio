@@ -66,6 +66,60 @@
   gap: var(--space-1);
 }
 
+/* ===== Lang switch · control segmentado ES / EN ===== */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  background: var(--color-bg-deep);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+}
+.lang-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-h);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-ink-mute);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: var(--space-h) var(--space-1);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--duration-base) ease,
+    color var(--duration-base) ease,
+    box-shadow var(--duration-base) ease;
+}
+.lang-opt .lang-flag {
+  width: 18px;
+  height: 12px;
+  border-radius: var(--radius-xs);
+  display: block;
+  opacity: 0.45;                       /* inactiva: bandera atenuada */
+  box-shadow: 0 0 0 1px rgba(26, 26, 24, 0.10);
+  transition: opacity var(--duration-base) ease, box-shadow var(--duration-base) ease;
+}
+/* Hover en la inactiva: se acerca al estado activo */
+.lang-opt:not(.is-active):hover { color: var(--color-ink); }
+.lang-opt:not(.is-active):hover .lang-flag { opacity: 0.8; }
+/* Activa: cápsula oscura rellena, alto contraste */
+.lang-opt.is-active {
+  color: var(--color-ink-on-dark);
+  background: var(--color-ink);
+  box-shadow: 0 1px 3px rgba(26, 26, 24, 0.28);
+}
+.lang-opt.is-active .lang-flag {
+  opacity: 1;
+  box-shadow: 0 0 0 1px rgba(244, 241, 236, 0.3);
+}
+.lang-opt:active { transform: scale(0.96); }
+
 /* ===== Nav toggle · hamburguesa → cruz =====
    Touch target 44×44 (WCAG 2.5.5 AAA, excepción de grilla).
    Geometría de las barras = medidas de icono. */

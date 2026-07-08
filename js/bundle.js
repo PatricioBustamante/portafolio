@@ -1,4 +1,550 @@
 /* ============================================
+   i18n DICTIONARY · textos de UI estáticos
+   --------------------------------------------
+   Solo UI/estructura. El contenido de proyectos
+   vive en projects-data.js (campos { es, en }).
+   Claves con markup usan data-i18n-html.
+   ============================================ */
+
+window.PB_DICT = {
+  es: {
+    /* ── Común ── */
+    'common.skip': 'Saltar al contenido principal',
+    'common.loading': 'Cargando sitio',
+    'common.home': 'Inicio',
+    'common.breadcrumb': 'Migas de pan',
+    'common.newWindow': '(abre en nueva ventana)',
+    'common.downloadCv': 'Descargar CV',
+    'common.contactMe': 'Contáctame',
+    'common.statYears': 'Años de experiencia',
+    'card.project': 'Proyecto',
+
+    /* ── Nav / header ── */
+    'nav.aria': 'Principal',
+    'nav.logoAria': 'Patricio Bustamante — Inicio',
+    'nav.projects': 'Proyectos',
+    'nav.about': 'Sobre mí',
+    'nav.contact': 'Contacto',
+    'nav.statusSr': 'Estado: ',
+    'nav.status': 'Disponible',
+    'nav.menuOpen': 'Abrir menú',
+    'nav.menuClose': 'Cerrar menú',
+    'lang.groupAria': 'Seleccionar idioma',
+    'lang.esAria': 'Cambiar a español',
+    'lang.enAria': 'Cambiar a inglés',
+
+    /* ── Footer ── */
+    'footer.homeAria': 'Volver al inicio',
+    'footer.timeAria': 'Hora local en Chile',
+    'footer.cursorAria': 'Activar o desactivar cursor personalizado',
+    'footer.cursorLabel': 'Cursor',
+    'footer.cursorOn': 'Activado',
+    'footer.cursorOff': 'Desactivado',
+    'footer.made': 'Hecho con cariño · Chile',
+
+    /* ── Contacto (compartido) ── */
+    'contact.label': '03 — Hablemos',
+    'contact.headlineIdea': '¿Tienes una<br><em>idea</em>? Hablemos.',
+    'contact.headlineSaw': '¿Te gustó lo que<br><em>viste</em>? Hablemos.',
+    'contact.emailAria': 'Enviar email a pbustamanteinzunza@gmail.com',
+    'contact.location': 'Ubicación',
+    'contact.locationContent': 'Concepción, Chile<br>Trabajando remoto<br>globalmente',
+    'contact.social': 'Social',
+    'contact.services': 'Servicios',
+    'contact.servicesContent': 'Diseño de Producto<br>Sistemas de Diseño<br>Consultoría UX',
+    'contact.currently': 'Actualmente',
+    'contact.currentlyLead': 'Aceptando proyectos<br>para Q3 — Q4 2026<br>',
+
+    /* ── Home ── */
+    'meta.homeTitle': 'Patricio Bustamante — Diseñador de Producto',
+    'meta.homeDesc': 'Diseñador de Producto enfocado en crear experiencias digitales con propósito. UX/UI, sistemas de diseño y estrategia de producto.',
+    'home.heroEyebrow': 'Diseñador de Producto — Chile',
+    'home.heroTitle': '<span class="line" aria-hidden="true"><span class="line-inner">Diseño</span></span><span class="line" aria-hidden="true"><span class="line-inner">productos <em>que</em></span></span><span class="line" aria-hidden="true"><span class="line-inner"><em>importan</em>.</span></span><span class="sr-only">Diseño productos que importan.</span>',
+    'home.heroIntro': 'Soy <strong>Patricio Bustamante</strong>, product designer enfocado en crear experiencias digitales con propósito. Trabajo en la intersección de estrategia, investigación y craft visual.',
+    'home.linkedinAria': 'LinkedIn (abre en nueva ventana)',
+    'home.scroll': 'Desliza',
+    'home.heroMeta': '<span>Disponibilidad</span>Aceptando proyectos<br>Q3 / Q4 2026',
+    'home.workLabel': '01 — Proyectos seleccionados',
+    'home.workTitle': 'Proyectos<br><em>recientes</em>',
+    'home.viewAll': 'Ver todos los proyectos',
+    'home.aboutLabel': '02 — About',
+    'home.aboutHeadline': 'Combino <em>estrategia, investigación y craft visual</em> para diseñar productos digitales que no solo funcionan, sino que <em>se sienten bien</em> al usarse.',
+    'home.aboutBody': '9+ años diseñando productos digitales para startups y empresas en LATAM. Mi enfoque integra estrategia de producto, investigación de usuarios y sistemas de diseño para crear experiencias que generan impacto real en el negocio y en las personas que las usan.',
+    'home.statProjects': 'Proyectos entregados',
+    'home.statCountries': 'Países / clientes',
+    'home.skillsLabel': 'Herramientas y habilidades',
+
+    /* ── Marquee home ── */
+    'mq.productDesign': 'Diseño de Producto',
+    'mq.designSystems': 'Design Systems',
+    'mq.userResearch': 'Investigación de Usuarios',
+    'mq.digitalBanking': 'Banca Digital',
+    'mq.productStrategy': 'Estrategia de Producto',
+    'mq.ia': 'Arquitectura de Información',
+    'mq.prototyping': 'Prototipado',
+    'mq.dataDriven': 'Data Driven Design',
+    'mq.b2c': 'Diseño B2C / B2B',
+    'mq.usability': 'Usability Testing',
+
+    /* ── Marquee work ── */
+    'mqw.fintech': 'Fintech',
+    'mqw.saas': 'SaaS',
+    'mqw.ecommerce': 'E-commerce',
+    'mqw.wellness': 'Bienestar',
+    'mqw.editorial': 'Editorial',
+    'mqw.designSystems': 'Sistemas de Diseño',
+
+    /* ── Skills pills (home) ── */
+    'skill.prototyping': 'Prototipado',
+    'skill.designSystems': 'Sistemas de Diseño',
+    'skill.userResearch': 'Investigación de usuarios',
+    'skill.usability': 'Test de usabilidad',
+    'skill.ia': 'Arquitectura de información',
+    'skill.productStrategy': 'Estrategia de producto',
+    'skill.dataDriven': 'Diseño basado en datos',
+
+    /* ── Work page ── */
+    'meta.workTitle': 'Proyectos — Patricio Bustamante',
+    'meta.workDesc': 'Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.',
+    'work.heroMeta': '<span>Período</span>2023 — 2026<br>12 proyectos destacados',
+
+    /* ── About page ── */
+    'meta.aboutTitle': 'Sobre mí — Patricio Bustamante',
+    'meta.aboutDesc': 'Sobre Patricio Bustamante: Diseñador de Producto chileno con más de 8 años de experiencia en banca, retail, telecomunicaciones y seguros en entornos B2C, B2B y B2B2C.',
+    'about.eyebrow': '02 — Sobre mí',
+    'about.title': 'Sobre<br><em>mí</em>',
+    'about.heroMeta': '<span>Base</span>Santiago, Chile<br>Disponible para proyectos remotos',
+    'about.profile': 'Perfil',
+    'about.headline': 'Combino <em>estrategia, investigación y craft visual</em> para diseñar productos digitales centrados en el usuario que <em>generan impacto real</em> en el negocio.',
+    'about.body1': 'Soy Diseñador de Producto con <strong>más de 9 años</strong> de experiencia en el desarrollo de soluciones digitales para sectores como <strong>banca, retail, telecomunicaciones y seguros</strong>, en entornos B2C, B2B y B2B2C.',
+    'about.body2': 'Mi enfoque integra estrategia de producto, investigación de usuarios y sistemas de diseño para maximizar la experiencia del usuario y el impacto en el negocio. He trabajado en Caja Los Andes, Betterfly, 2Brains, Banco Ripley, Santander, BCI, Coopeuch, Liberty Seguros, Consorcio y Nacional Monte de Piedad (México).',
+    'about.statCompanies': 'Empresas / consultoras',
+    'about.statSectors': 'Sectores industriales',
+    'about.experience': 'Experiencia profesional',
+    'about.education': 'Educación y certificaciones',
+    'about.methods': 'Metodologías y técnicas',
+    'about.tools': 'Herramientas',
+    'about.soft': 'Habilidades blandas',
+    'about.languages': 'Idiomas',
+
+    /* Timeline — experiencia */
+    'about.exp1Date': 'Mar. 2025 — Presente',
+    'about.exp1Detail': 'Implementé un Design System Federado que estandarizó componentes UI/UX en toda la organización, reduciendo el tiempo de desarrollo en un 25%. Lideré la documentación para 8 equipos de productos digitales, logrando adopción del 90% en los primeros 3 meses.',
+    'about.exp2Date': 'Sept. 2024 — Dic. 2024',
+    'about.exp2Detail': 'Lideré la implementación de Scrum capacitando al equipo en prácticas ágiles, diseñé el roadmap estratégico y ejecuté mejoras de rendimiento y estabilidad en la app móvil.',
+    'about.exp3Date': 'Jun. 2022 — Agost. 2024',
+    'about.exp3Detail': 'Rediseñé la plataforma de productos prendarios del Nacional Monte de Piedad (+20% eficiencia en pago y liberación). Optimicé servicios API para Banco Security mediante research, reduciendo el tiempo de procesamiento en 15%.',
+    'about.exp4Date': 'May. 2021 — Jun. 2022',
+    'about.exp4Detail': 'Diseñé experiencias para usuarios internos y externos (+25% adopción digital). Lideré la implementación en España, Perú y México. Realicé A/B testing optimizando conversiones en un 18% y mentoreé a 3 diseñadores junior.',
+    'about.exp5Date': 'Dic. 2020 — May. 2021',
+    'about.exp5Detail': 'Desarrollé la experiencia de la app híbrida en los flujos de Crédito de Consumo, Avance, Súper Avance y Seguros. Tests de usabilidad, entrevistas de usuario y mejoras visuales sobre el sistema de diseño.',
+    'about.exp6Date': 'Agost. 2019 — Dic. 2020',
+    'about.exp6Detail': 'Consultor en UI para Banco BCI (design Sprint con GoPlaceit para créditos hipotecarios, plataforma de cuentas Pyme) y Coopeuch (auditoría y construcción del sistema de diseño para todas sus plataformas).',
+    'about.exp7Date': 'May. 2019 — Agost. 2019',
+    'about.exp7Detail': 'Proyectos internos en Banco Santander para las áreas de Facturación y Recursos Humanos: plataformas de gestión de empleados y facturación de proveedores.',
+    'about.exp8Date': 'May. 2019 — Agost. 2019',
+    'about.exp8Detail': 'Banco BCI: bajada de negocio e interfaz de plataforma jurídica. Consorcio: proceso de Discovery con benchmark visual y operacional. Liberty Seguros: investigación y rediseño de la plataforma de Seguimiento de Siniestros.',
+
+    /* Timeline — educación */
+    'about.edu1Role': 'ChatGPT para Product Designers',
+    'about.edu2Role': 'Scrum Foundation Professional Certification',
+    'about.edu3Role': 'Diplomado en Arquitectura de Información y UX',
+    'about.edu4Role': 'Curso UX Design · 72 horas',
+    'about.edu5Role': 'Diseño Gráfico Profesional',
+    'about.eduOnline': 'Online',
+
+    /* Metodologías */
+    'meth.doubleDiamond': 'Doble diamante',
+    'meth.tripleDiamond': 'Triple diamante',
+    'meth.userResearch': 'Investigación de usuarios',
+    'meth.userInterviews': 'Entrevistas con usuarios',
+    'meth.userArchetypes': 'Arquetipos de usuario',
+    'meth.prototyping': 'Prototipado',
+    'meth.usability': 'Test de usabilidad',
+    'meth.designSystems': 'Sistemas de Diseño',
+    'meth.mobileDesign': 'Diseño móvil',
+    'meth.roadmapping': 'Hoja de ruta y backlogs',
+    'meth.ia': 'Arquitectura de información',
+    'meth.abTesting': 'Pruebas A/B',
+
+    /* Soft skills */
+    'soft.communication': 'Comunicación',
+    'soft.negotiation': 'Negociación',
+    'soft.autonomy': 'Autonomía',
+    'soft.teamwork': 'Trabajo en equipo',
+    'soft.adaptability': 'Adaptabilidad',
+    'soft.empathy': 'Empatía',
+    'soft.openFeedback': 'Feedback abierto',
+    'soft.problemSolving': 'Resolución de problemas',
+
+    /* Idiomas */
+    'lng.spanish': 'Español — Nativo',
+    'lng.english': 'Inglés — B1',
+
+    /* ── Detalle de proyecto ── */
+    'meta.projectTitle': 'Proyecto — Patricio Bustamante',
+    'meta.projectDesc': 'Detalle de proyecto · Patricio Bustamante, Diseñador de Producto.',
+    'pj.role': 'Rol',
+    'pj.focus': 'Foco',
+    'pj.platform': 'Plataforma',
+    'pj.year': 'Año',
+    'pj.context': 'Contexto',
+    'pj.challenge': 'Desafío',
+    'pj.analysis': 'Análisis',
+    'pj.imagesAria': 'Imágenes del proyecto',
+    'pj.impactLabel': '04 — Impacto',
+    'pj.impactTitle': 'Impacto <em>medible</em>',
+    'pj.nextLabel': 'Siguiente proyecto',
+    'pj.backToProjects': 'Volver a proyectos',
+    'pj.before': 'Antes',
+    'pj.after': 'Después'
+  },
+
+  en: {
+    /* ── Common ── */
+    'common.skip': 'Skip to main content',
+    'common.loading': 'Loading site',
+    'common.home': 'Home',
+    'common.breadcrumb': 'Breadcrumb',
+    'common.newWindow': '(opens in a new window)',
+    'common.downloadCv': 'Download CV',
+    'common.contactMe': 'Get in touch',
+    'common.statYears': 'Years of experience',
+    'card.project': 'Project',
+
+    /* ── Nav / header ── */
+    'nav.aria': 'Main',
+    'nav.logoAria': 'Patricio Bustamante — Home',
+    'nav.projects': 'Work',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.statusSr': 'Status: ',
+    'nav.status': 'Available',
+    'nav.menuOpen': 'Open menu',
+    'nav.menuClose': 'Close menu',
+    'lang.groupAria': 'Select language',
+    'lang.esAria': 'Switch to Spanish',
+    'lang.enAria': 'Switch to English',
+
+    /* ── Footer ── */
+    'footer.homeAria': 'Back to home',
+    'footer.timeAria': 'Local time in Chile',
+    'footer.cursorAria': 'Toggle custom cursor',
+    'footer.cursorLabel': 'Cursor',
+    'footer.cursorOn': 'On',
+    'footer.cursorOff': 'Off',
+    'footer.made': 'Made with care · Chile',
+
+    /* ── Contacto (compartido) ── */
+    'contact.label': '03 — Let’s talk',
+    'contact.headlineIdea': 'Got an<br><em>idea</em>? Let’s talk.',
+    'contact.headlineSaw': 'Like what you<br><em>saw</em>? Let’s talk.',
+    'contact.emailAria': 'Send an email to pbustamanteinzunza@gmail.com',
+    'contact.location': 'Location',
+    'contact.locationContent': 'Concepción, Chile<br>Working remotely<br>worldwide',
+    'contact.social': 'Social',
+    'contact.services': 'Services',
+    'contact.servicesContent': 'Product Design<br>Design Systems<br>UX Consulting',
+    'contact.currently': 'Currently',
+    'contact.currentlyLead': 'Accepting projects<br>for Q3 — Q4 2026<br>',
+
+    /* ── Home ── */
+    'meta.homeTitle': 'Patricio Bustamante — Product Designer',
+    'meta.homeDesc': 'Product Designer focused on building purposeful digital experiences. UX/UI, design systems and product strategy.',
+    'home.heroEyebrow': 'Product Designer — Chile',
+    'home.heroTitle': '<span class="line" aria-hidden="true"><span class="line-inner">I design</span></span><span class="line" aria-hidden="true"><span class="line-inner">products <em>that</em></span></span><span class="line" aria-hidden="true"><span class="line-inner"><em>matter</em>.</span></span><span class="sr-only">I design products that matter.</span>',
+    'home.heroIntro': 'I’m <strong>Patricio Bustamante</strong>, a product designer focused on building purposeful digital experiences. I work at the intersection of strategy, research and visual craft.',
+    'home.linkedinAria': 'LinkedIn (opens in a new window)',
+    'home.scroll': 'Scroll',
+    'home.heroMeta': '<span>Availability</span>Accepting projects<br>Q3 / Q4 2026',
+    'home.workLabel': '01 — Selected work',
+    'home.workTitle': 'Recent<br><em>work</em>',
+    'home.viewAll': 'View all projects',
+    'home.aboutLabel': '02 — About',
+    'home.aboutHeadline': 'I blend <em>strategy, research and visual craft</em> to design digital products that don’t just work, but <em>feel right</em> to use.',
+    'home.aboutBody': '9+ years designing digital products for startups and companies across LATAM. My approach combines product strategy, user research and design systems to create experiences that drive real impact for the business and the people who use them.',
+    'home.statProjects': 'Projects delivered',
+    'home.statCountries': 'Countries / clients',
+    'home.skillsLabel': 'Tools & skills',
+
+    /* ── Marquee home ── */
+    'mq.productDesign': 'Product Design',
+    'mq.designSystems': 'Design Systems',
+    'mq.userResearch': 'User Research',
+    'mq.digitalBanking': 'Digital Banking',
+    'mq.productStrategy': 'Product Strategy',
+    'mq.ia': 'Information Architecture',
+    'mq.prototyping': 'Prototyping',
+    'mq.dataDriven': 'Data Driven Design',
+    'mq.b2c': 'B2C / B2B Design',
+    'mq.usability': 'Usability Testing',
+
+    /* ── Marquee work ── */
+    'mqw.fintech': 'Fintech',
+    'mqw.saas': 'SaaS',
+    'mqw.ecommerce': 'E-commerce',
+    'mqw.wellness': 'Wellness',
+    'mqw.editorial': 'Editorial',
+    'mqw.designSystems': 'Design Systems',
+
+    /* ── Skills pills (home) ── */
+    'skill.prototyping': 'Prototyping',
+    'skill.designSystems': 'Design Systems',
+    'skill.userResearch': 'User research',
+    'skill.usability': 'Usability testing',
+    'skill.ia': 'Information architecture',
+    'skill.productStrategy': 'Product strategy',
+    'skill.dataDriven': 'Data-driven design',
+
+    /* ── Work page ── */
+    'meta.workTitle': 'Work — Patricio Bustamante',
+    'meta.workDesc': 'A selection of recent product design, UX/UI and design systems work by Patricio Bustamante.',
+    'work.heroMeta': '<span>Period</span>2023 — 2026<br>12 featured projects',
+
+    /* ── About page ── */
+    'meta.aboutTitle': 'About — Patricio Bustamante',
+    'meta.aboutDesc': 'About Patricio Bustamante: Chilean Product Designer with 8+ years of experience across banking, retail, telecom and insurance in B2C, B2B and B2B2C settings.',
+    'about.eyebrow': '02 — About',
+    'about.title': 'About<br><em>me</em>',
+    'about.heroMeta': '<span>Based in</span>Santiago, Chile<br>Available for remote projects',
+    'about.profile': 'Profile',
+    'about.headline': 'I blend <em>strategy, research and visual craft</em> to design user-centered digital products that <em>drive real impact</em> for the business.',
+    'about.body1': 'I’m a Product Designer with <strong>9+ years</strong> of experience building digital solutions across <strong>banking, retail, telecom and insurance</strong>, in B2C, B2B and B2B2C settings.',
+    'about.body2': 'My approach combines product strategy, user research and design systems to maximize both user experience and business impact. I’ve worked with Caja Los Andes, Betterfly, 2Brains, Banco Ripley, Santander, BCI, Coopeuch, Liberty Seguros, Consorcio and Nacional Monte de Piedad (Mexico).',
+    'about.statCompanies': 'Companies / agencies',
+    'about.statSectors': 'Industry sectors',
+    'about.experience': 'Professional experience',
+    'about.education': 'Education & certifications',
+    'about.methods': 'Methodologies & techniques',
+    'about.tools': 'Tools',
+    'about.soft': 'Soft skills',
+    'about.languages': 'Languages',
+
+    /* Timeline — experiencia */
+    'about.exp1Date': 'Mar 2025 — Present',
+    'about.exp1Detail': 'Implemented a federated Design System that standardized UI/UX components across the organization, cutting development time by 25%. Led documentation for 8 digital product teams, reaching 90% adoption within the first 3 months.',
+    'about.exp2Date': 'Sep 2024 — Dec 2024',
+    'about.exp2Detail': 'Led the adoption of Scrum by coaching the team on agile practices, designed the strategic roadmap and shipped performance and stability improvements to the mobile app.',
+    'about.exp3Date': 'Jun 2022 — Aug 2024',
+    'about.exp3Detail': 'Redesigned Nacional Monte de Piedad’s pawn-loan platform (+20% efficiency in payment and release). Optimized API services for Banco Security through research, reducing processing time by 15%.',
+    'about.exp4Date': 'May 2021 — Jun 2022',
+    'about.exp4Detail': 'Designed experiences for internal and external users (+25% digital adoption). Led rollouts in Spain, Peru and Mexico. Ran A/B testing that improved conversions by 18% and mentored 3 junior designers.',
+    'about.exp5Date': 'Dec 2020 — May 2021',
+    'about.exp5Detail': 'Built the hybrid app experience for the Consumer Credit, Cash Advance, Super Advance and Insurance flows. Usability testing, user interviews and visual improvements on top of the design system.',
+    'about.exp6Date': 'Aug 2019 — Dec 2020',
+    'about.exp6Detail': 'UI consultant for Banco BCI (Design Sprint with GoPlaceit for mortgage loans, SME accounts platform) and Coopeuch (audit and build of the design system across all its platforms).',
+    'about.exp7Date': 'May 2019 — Aug 2019',
+    'about.exp7Detail': 'Internal projects at Banco Santander for the Billing and HR areas: employee management and supplier billing platforms.',
+    'about.exp8Date': 'May 2019 — Aug 2019',
+    'about.exp8Detail': 'Banco BCI: business framing and UI for a legal platform. Consorcio: Discovery process with visual and operational benchmarking. Liberty Seguros: research and redesign of the Claims Tracking platform.',
+
+    /* Timeline — educación */
+    'about.edu1Role': 'ChatGPT for Product Designers',
+    'about.edu2Role': 'Scrum Foundation Professional Certification',
+    'about.edu3Role': 'Postgraduate Diploma in Information Architecture & UX',
+    'about.edu4Role': 'UX Design Course · 72 hours',
+    'about.edu5Role': 'Professional Graphic Design',
+    'about.eduOnline': 'Online',
+
+    /* Metodologías */
+    'meth.doubleDiamond': 'Double diamond',
+    'meth.tripleDiamond': 'Triple diamond',
+    'meth.userResearch': 'User research',
+    'meth.userInterviews': 'User interviews',
+    'meth.userArchetypes': 'User archetypes',
+    'meth.prototyping': 'Prototyping',
+    'meth.usability': 'Usability testing',
+    'meth.designSystems': 'Design Systems',
+    'meth.mobileDesign': 'Mobile design',
+    'meth.roadmapping': 'Roadmapping & backlogs',
+    'meth.ia': 'Information architecture',
+    'meth.abTesting': 'A/B testing',
+
+    /* Soft skills */
+    'soft.communication': 'Communication',
+    'soft.negotiation': 'Negotiation',
+    'soft.autonomy': 'Autonomy',
+    'soft.teamwork': 'Teamwork',
+    'soft.adaptability': 'Adaptability',
+    'soft.empathy': 'Empathy',
+    'soft.openFeedback': 'Open feedback',
+    'soft.problemSolving': 'Problem solving',
+
+    /* Idiomas */
+    'lng.spanish': 'Spanish — Native',
+    'lng.english': 'English — B1',
+
+    /* ── Detalle de proyecto ── */
+    'meta.projectTitle': 'Project — Patricio Bustamante',
+    'meta.projectDesc': 'Project detail · Patricio Bustamante, Product Designer.',
+    'pj.role': 'Role',
+    'pj.focus': 'Focus',
+    'pj.platform': 'Platform',
+    'pj.year': 'Year',
+    'pj.context': 'Context',
+    'pj.challenge': 'Challenge',
+    'pj.analysis': 'Analysis',
+    'pj.imagesAria': 'Project images',
+    'pj.impactLabel': '04 — Impact',
+    'pj.impactTitle': 'Measurable <em>impact</em>',
+    'pj.nextLabel': 'Next project',
+    'pj.backToProjects': 'Back to projects',
+    'pj.before': 'Before',
+    'pj.after': 'After'
+  }
+};
+/* ============================================
+   i18n ENGINE · ES / EN
+   --------------------------------------------
+   - Detecta idioma: ?lang= → localStorage → navegador → 'es'
+   - t(key)        → string traducido (fallback a 'es', luego a la key)
+   - localize(v)   → resuelve un valor plano o un objeto { es, en }
+   - applyTranslations(root) → recorre [data-i18n], [data-i18n-html],
+                               [data-i18n-attr] y aplica textos
+   - setLang / toggle → cambia idioma, persiste, refleja ?lang= en la
+                        URL (compartible / rastreable) y emite
+                        'pb:langchange'
+   - hreflang → genera <link rel="alternate"> es/en/x-default desde la
+                URL actual (sin hardcodear dominio)
+
+   Se carga (bundleado) antes de los Web Components y main.js.
+   ============================================ */
+
+(function () {
+  const STORAGE_KEY = 'pb:lang';
+  const SUPPORTED = ['es', 'en'];
+  const DEFAULT = 'es';
+
+  function paramLang() {
+    try {
+      const p = new URLSearchParams(window.location.search).get('lang');
+      if (p && SUPPORTED.includes(p)) return p;
+    } catch {}
+    return null;
+  }
+
+  function detect() {
+    const fromUrl = paramLang();
+    if (fromUrl) {
+      try { localStorage.setItem(STORAGE_KEY, fromUrl); } catch {}
+      return fromUrl;
+    }
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && SUPPORTED.includes(saved)) return saved;
+    } catch {}
+    const nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (nav.startsWith('en')) return 'en';
+    return DEFAULT;
+  }
+
+  let lang = detect();
+
+  function dict() { return window.PB_DICT || {}; }
+
+  function t(key) {
+    const d = dict();
+    const table = d[lang] || {};
+    if (Object.prototype.hasOwnProperty.call(table, key)) return table[key];
+    const fb = d[DEFAULT] || {};
+    return Object.prototype.hasOwnProperty.call(fb, key) ? fb[key] : key;
+  }
+
+  // Resuelve un campo que puede ser plano o un objeto { es, en }
+  function localize(value) {
+    if (value && typeof value === 'object' && !Array.isArray(value) &&
+        (('es' in value) || ('en' in value))) {
+      if (lang in value && value[lang] !== undefined) return value[lang];
+      return value[DEFAULT] !== undefined ? value[DEFAULT] : value.en;
+    }
+    return value;
+  }
+
+  function applyTranslations(root) {
+    root = root || document;
+    root.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+    root.querySelectorAll('[data-i18n-html]').forEach(el => {
+      el.innerHTML = t(el.getAttribute('data-i18n-html'));
+    });
+    root.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      el.getAttribute('data-i18n-attr').split(';').forEach(pair => {
+        const idx = pair.indexOf(':');
+        if (idx === -1) return;
+        const attr = pair.slice(0, idx).trim();
+        const key = pair.slice(idx + 1).trim();
+        if (attr && key) el.setAttribute(attr, t(key));
+      });
+    });
+  }
+
+  function updateHtmlLang() { document.documentElement.lang = lang; }
+
+  // Refleja el idioma elegido en la URL (?lang=) sin recargar
+  function syncUrl() {
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState(null, '', url.href);
+    } catch {}
+    updateAlternates();
+  }
+
+  // Genera / actualiza los <link rel="alternate" hreflang> desde la URL actual
+  function updateAlternates() {
+    const head = document.head;
+    if (!head) return;
+    const make = (hreflang, langValue) => {
+      let link = head.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`);
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'alternate');
+        link.setAttribute('hreflang', hreflang);
+        head.appendChild(link);
+      }
+      try {
+        const url = new URL(window.location.href);
+        if (langValue) url.searchParams.set('lang', langValue);
+        else url.searchParams.delete('lang');
+        link.setAttribute('href', url.href);
+      } catch {}
+    };
+    make('es', 'es');
+    make('en', 'en');
+    make('x-default', null);
+  }
+
+  function setLang(next) {
+    if (!SUPPORTED.includes(next) || next === lang) return;
+    lang = next;
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch {}
+    updateHtmlLang();
+    applyTranslations(document);
+    syncUrl();
+    document.dispatchEvent(new CustomEvent('pb:langchange', { detail: { lang } }));
+  }
+
+  function toggle() { setLang(lang === 'es' ? 'en' : 'es'); }
+
+  window.PB_I18N = {
+    get lang() { return lang; },
+    t, localize, setLang, toggle, applyTranslations,
+    SUPPORTED, DEFAULT
+  };
+
+  updateHtmlLang();
+  function init() {
+    applyTranslations(document);
+    updateAlternates();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+/* ============================================
    <site-header>  · custom element
    Renders the nav in light DOM so existing CSS
    selectors and main.js queries keep working.
@@ -6,7 +552,15 @@
    Attributes:
      current   "work" | "about" | (empty for home)
                  → marks the matching nav link with .is-active
+
+   i18n: textos vía data-i18n; el control segmentado
+   .lang-switch (ES / EN con banderas) cambia de idioma
+   con PB_I18N.setLang() y marca el idioma activo.
    ============================================ */
+
+const PB_FLAG_ES = `<svg class="lang-flag" viewBox="0 0 900 600" aria-hidden="true" focusable="false"><rect width="900" height="600" fill="#fff"/><rect y="300" width="900" height="300" fill="#D52B1E"/><rect width="300" height="300" fill="#0039A6"/><path fill="#fff" d="M150 70 169 124 226 125 180 160 197 215 150 182 103 215 120 160 74 125 131 124Z"/></svg>`;
+
+const PB_FLAG_EN = `<svg class="lang-flag" viewBox="0 0 190 100" aria-hidden="true" focusable="false"><rect width="190" height="100" fill="#fff"/><g fill="#B22234"><rect width="190" height="7.7"/><rect y="15.4" width="190" height="7.7"/><rect y="30.8" width="190" height="7.7"/><rect y="46.2" width="190" height="7.7"/><rect y="61.5" width="190" height="7.7"/><rect y="76.9" width="190" height="7.7"/><rect y="92.3" width="190" height="7.7"/></g><rect width="76" height="53.8" fill="#3C3B6E"/><g fill="#fff"><circle cx="12" cy="13" r="3.4"/><circle cx="26" cy="13" r="3.4"/><circle cx="40" cy="13" r="3.4"/><circle cx="54" cy="13" r="3.4"/><circle cx="68" cy="13" r="3.4"/><circle cx="19" cy="27" r="3.4"/><circle cx="33" cy="27" r="3.4"/><circle cx="47" cy="27" r="3.4"/><circle cx="61" cy="27" r="3.4"/><circle cx="12" cy="41" r="3.4"/><circle cx="26" cy="41" r="3.4"/><circle cx="40" cy="41" r="3.4"/><circle cx="54" cy="41" r="3.4"/><circle cx="68" cy="41" r="3.4"/></g></svg>`;
 
 class SiteHeader extends HTMLElement {
   connectedCallback() {
@@ -19,29 +573,53 @@ class SiteHeader extends HTMLElement {
     const isAbout = current === 'about' ? ' is-active' : '';
 
     this.innerHTML = `
-<nav class="nav" aria-label="Principal">
-  <a href="${base}index.html" class="nav-logo magnetic" aria-label="Patricio Bustamante — Inicio">
+<nav class="nav" data-i18n-attr="aria-label:nav.aria">
+  <a href="${base}index.html" class="nav-logo magnetic" data-i18n-attr="aria-label:nav.logoAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="nav-logo-mark" width="32" height="34">
     <span class="nav-logo-text">Patricio Bustamante</span>
   </a>
 
   <div class="nav-links" id="navLinks">
-    <a href="${workHref}" class="magnetic${isWork}"${isWork ? ' aria-current="page"' : ''}><span class="nav-num">01</span>Proyectos</a>
-    <a href="${aboutHref}" class="magnetic${isAbout}"${isAbout ? ' aria-current="page"' : ''}><span class="nav-num">02</span>Sobre mí</a>
-    <a href="${base}index.html#contact" class="magnetic"><span class="nav-num">03</span>Contacto</a>
+    <a href="${workHref}" class="magnetic${isWork}"${isWork ? ' aria-current="page"' : ''}><span class="nav-num">01</span><span data-i18n="nav.projects">Proyectos</span></a>
+    <a href="${aboutHref}" class="magnetic${isAbout}"${isAbout ? ' aria-current="page"' : ''}><span class="nav-num">02</span><span data-i18n="nav.about">Sobre mí</span></a>
+    <a href="${base}index.html#contact" class="magnetic"><span class="nav-num">03</span><span data-i18n="nav.contact">Contacto</span></a>
+  </div>
+
+  <div class="lang-switch" role="group" data-i18n-attr="aria-label:lang.groupAria">
+    <button type="button" class="lang-opt" data-lang="es" data-i18n-attr="aria-label:lang.esAria">${PB_FLAG_ES}<span class="lang-opt-text">ES</span></button>
+    <button type="button" class="lang-opt" data-lang="en" data-i18n-attr="aria-label:lang.enAria">${PB_FLAG_EN}<span class="lang-opt-text">EN</span></button>
   </div>
 
   <p class="nav-status" role="status">
     <span class="status-dot" aria-hidden="true"></span>
-    <span class="sr-only">Estado: </span>Disponible
+    <span class="sr-only" data-i18n="nav.statusSr">Estado: </span><span data-i18n="nav.status">Disponible</span>
   </p>
 
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+  <button class="nav-toggle" id="navToggle" data-i18n-attr="aria-label:nav.menuOpen" aria-expanded="false" aria-controls="navLinks">
     <span class="nav-toggle-bar" aria-hidden="true"></span>
     <span class="nav-toggle-bar" aria-hidden="true"></span>
     <span class="nav-toggle-bar" aria-hidden="true"></span>
   </button>
 </nav>`;
+
+    if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
+
+    const opts = Array.from(this.querySelectorAll('.lang-opt'));
+    const syncActive = () => {
+      const active = window.PB_I18N ? window.PB_I18N.lang : 'es';
+      opts.forEach(btn => {
+        const on = btn.getAttribute('data-lang') === active;
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-pressed', String(on));
+      });
+    };
+    opts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.PB_I18N) window.PB_I18N.setLang(btn.getAttribute('data-lang'));
+      });
+    });
+    document.addEventListener('pb:langchange', syncActive);
+    syncActive();
   }
 }
 
@@ -62,16 +640,18 @@ class SiteFooter extends HTMLElement {
 
     this.innerHTML = `
 <footer role="contentinfo">
-  <a href="${base}index.html" class="footer-logo magnetic" aria-label="Volver al inicio">
+  <a href="${base}index.html" class="footer-logo magnetic" data-i18n-attr="aria-label:footer.homeAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="footer-logo-mark" width="32" height="34">
   </a>
   <p>&copy; ${year} — Patricio Bustamante</p>
-  <p class="footer-time" id="localTime" aria-label="Hora local en Chile">--:--:-- CLT</p>
-  <button type="button" class="cursor-toggle" aria-pressed="true" aria-label="Activar o desactivar cursor personalizado">
-    Cursor <span class="cursor-toggle-state" aria-hidden="true">Activado</span>
+  <p class="footer-time" id="localTime" data-i18n-attr="aria-label:footer.timeAria">--:--:-- CLT</p>
+  <button type="button" class="cursor-toggle" aria-pressed="true" data-i18n-attr="aria-label:footer.cursorAria">
+    <span data-i18n="footer.cursorLabel">Cursor</span> <span class="cursor-toggle-state" aria-hidden="true">Activado</span>
   </button>
-  <p>Hecho con cariño &middot; Chile</p>
+  <p data-i18n="footer.made">Hecho con cariño &middot; Chile</p>
 </footer>`;
+
+    if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
   }
 }
 
@@ -86,13 +666,30 @@ if (!customElements.get('site-footer')) {
    Attributes:
      slug   key from window.PROJECTS
             → renders the full project row HTML
+
+   i18n: los campos traducibles de PROJECTS son
+   objetos { es, en }; se resuelven con PB_I18N.localize.
+   Se re-renderiza al emitirse 'pb:langchange'.
    ============================================ */
 
 class ProjectCard extends HTMLElement {
   connectedCallback() {
+    this.render();
+    this._onLang = () => this.render();
+    document.addEventListener('pb:langchange', this._onLang);
+  }
+
+  disconnectedCallback() {
+    if (this._onLang) document.removeEventListener('pb:langchange', this._onLang);
+  }
+
+  render() {
     const slug = this.getAttribute('slug');
     const p = window.PROJECTS && window.PROJECTS[slug];
     if (!p) return;
+
+    const L = v => (window.PB_I18N ? window.PB_I18N.localize(v) : v);
+    const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
     const inSubpage = window.location.pathname.includes('/pages/');
     const href = inSubpage
@@ -105,7 +702,12 @@ class ProjectCard extends HTMLElement {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
 
-    const tagsHtml = (p.tags || [])
+    const title = L(p.title);
+    const category = L(p.category);
+    const summary = L(p.summary);
+    const tags = L(p.tags) || [];
+
+    const tagsHtml = tags
       .map(t => `<span class="project-tag">${esc(t)}</span>`)
       .join('');
 
@@ -118,17 +720,17 @@ class ProjectCard extends HTMLElement {
     const num = String(listIndex).padStart(2, '0');
 
     this.innerHTML = `
-<a href="${href}" class="project" data-preview="${esc(p.preview)}" aria-label="Proyecto ${num}: ${esc(p.title)}, ${esc(p.category)} ${esc(p.year)}">
+<a href="${href}" class="project" data-preview="${esc(p.preview)}" aria-label="${esc(t('card.project'))} ${esc(num)}: ${esc(title)}, ${esc(category)} ${esc(p.year)}">
   <div class="project-num" aria-hidden="true">${num}</div>
   <div class="project-info">
     <div class="company-badge">
       <span class="company-logo-mark" aria-hidden="true">${esc(initial)}</span>
       <span class="company-badge-name">${esc(p.company || '')}</span>
     </div>
-    <div class="project-title">${esc(p.title)}</div>
-    <div class="project-subtitle">${esc(p.category)} &middot; ${esc(p.year)}</div>
+    <div class="project-title">${esc(title)}</div>
+    <div class="project-subtitle">${esc(category)} &middot; ${esc(p.year)}</div>
   </div>
-  <div class="project-desc">${esc(p.summary)}</div>
+  <div class="project-desc">${esc(summary)}</div>
   <div class="project-tags">${tagsHtml}</div>
   <span class="project-arrow magnetic" aria-hidden="true">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
@@ -159,6 +761,9 @@ if (!customElements.get('project-card')) {
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(pointer: fine)');
+
+// i18n helper (PB_I18N se carga antes que bundle.js)
+const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
 // ===== Disable browser zoom (keyboard + scroll) =====
 document.addEventListener('keydown', e => {
@@ -222,9 +827,12 @@ function applyCursorState() {
   document.querySelectorAll('.cursor-toggle').forEach(btn => {
     btn.setAttribute('aria-pressed', String(cursorEnabled));
     const stateEl = btn.querySelector('.cursor-toggle-state');
-    if (stateEl) stateEl.textContent = cursorEnabled ? 'Activado' : 'Desactivado';
+    if (stateEl) stateEl.textContent = cursorEnabled ? t('footer.cursorOn') : t('footer.cursorOff');
   });
 }
+
+// Refresca textos dependientes de estado cuando cambia el idioma
+document.addEventListener('pb:langchange', () => applyCursorState());
 
 let cursorRafId = null;
 let cursorTick = null;
@@ -404,7 +1012,7 @@ function setMenuOpen(open) {
   document.body.classList.toggle('menu-open', open);
   if (navToggle) {
     navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    navToggle.setAttribute('aria-label', open ? t('nav.menuClose') : t('nav.menuOpen'));
   }
   if (open) {
     const firstLink = navLinksEl && navLinksEl.querySelector('a');
