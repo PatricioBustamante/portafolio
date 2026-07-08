@@ -32,6 +32,17 @@ section {
   a, button { cursor: pointer; }
   .cursor-dot { display: none; }
 
+  /* Hero: botones a 100% del contenedor, apilados */
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* Header: superficie sólida translúcida, sin blend mode */
   .nav {
     padding: var(--space-2) var(--container-px-mobile);

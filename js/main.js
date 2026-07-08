@@ -16,6 +16,9 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(pointer: fine)');
 
+// i18n helper (PB_I18N se carga antes que bundle.js)
+const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
+
 // ===== Disable browser zoom (keyboard + scroll) =====
 document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey) {
@@ -78,9 +81,12 @@ function applyCursorState() {
   document.querySelectorAll('.cursor-toggle').forEach(btn => {
     btn.setAttribute('aria-pressed', String(cursorEnabled));
     const stateEl = btn.querySelector('.cursor-toggle-state');
-    if (stateEl) stateEl.textContent = cursorEnabled ? 'Activado' : 'Desactivado';
+    if (stateEl) stateEl.textContent = cursorEnabled ? t('footer.cursorOn') : t('footer.cursorOff');
   });
 }
+
+// Refresca textos dependientes de estado cuando cambia el idioma
+document.addEventListener('pb:langchange', () => applyCursorState());
 
 let cursorRafId = null;
 let cursorTick = null;
@@ -260,7 +266,7 @@ function setMenuOpen(open) {
   document.body.classList.toggle('menu-open', open);
   if (navToggle) {
     navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    navToggle.setAttribute('aria-label', open ? t('nav.menuClose') : t('nav.menuOpen'));
   }
   if (open) {
     const firstLink = navLinksEl && navLinksEl.querySelector('a');

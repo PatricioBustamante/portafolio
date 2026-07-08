@@ -12,16 +12,18 @@ class SiteFooter extends HTMLElement {
 
     this.innerHTML = `
 <footer role="contentinfo">
-  <a href="${base}index.html" class="footer-logo magnetic" aria-label="Volver al inicio">
+  <a href="${base}index.html" class="footer-logo magnetic" data-i18n-attr="aria-label:footer.homeAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="footer-logo-mark" width="32" height="34">
   </a>
   <p>&copy; ${year} — Patricio Bustamante</p>
-  <p class="footer-time" id="localTime" aria-label="Hora local en Chile">--:--:-- CLT</p>
-  <button type="button" class="cursor-toggle" aria-pressed="true" aria-label="Activar o desactivar cursor personalizado">
-    Cursor <span class="cursor-toggle-state" aria-hidden="true">Activado</span>
+  <p class="footer-time" id="localTime" data-i18n-attr="aria-label:footer.timeAria">--:--:-- CLT</p>
+  <button type="button" class="cursor-toggle" aria-pressed="true" data-i18n-attr="aria-label:footer.cursorAria">
+    <span data-i18n="footer.cursorLabel">Cursor</span> <span class="cursor-toggle-state" aria-hidden="true">Activado</span>
   </button>
-  <p>Hecho con cariño &middot; Chile</p>
+  <p data-i18n="footer.made">Hecho con cariño &middot; Chile</p>
 </footer>`;
+
+    if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
   }
 }
 
