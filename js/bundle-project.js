@@ -996,7 +996,7 @@ function applyCursorState() {
     cursor.style.display = '';
     document.body.classList.add('has-custom-cursor');
   } else {
-    if (cursor) cursor.style.display = 'none';
+    if (cursor && finePointer.matches) cursor.style.display = 'none';
     document.body.classList.remove('has-custom-cursor');
   }
   document.querySelectorAll('.cursor-toggle').forEach(btn => {
@@ -1049,6 +1049,23 @@ if (cursorSupported) {
   document.addEventListener('mousemove', () => {
     if (cursorEnabled) document.body.classList.add('has-custom-cursor');
   });
+}
+
+// Táctil: el punto marca dónde toca el dedo
+if (cursor && !finePointer.matches) {
+  cursor.classList.add('cursor-dot--touch');
+  const showTouch = (e) => {
+    const point = e.touches[0];
+    if (!point) return;
+    cursor.style.left = point.clientX + 'px';
+    cursor.style.top = point.clientY + 'px';
+    cursor.classList.add('touching');
+  };
+  const hideTouch = () => cursor.classList.remove('touching');
+  document.addEventListener('touchstart', showTouch, { passive: true });
+  document.addEventListener('touchmove', showTouch, { passive: true });
+  document.addEventListener('touchend', hideTouch, { passive: true });
+  document.addEventListener('touchcancel', hideTouch, { passive: true });
 }
 
 document.querySelectorAll('.cursor-toggle').forEach(btn => {

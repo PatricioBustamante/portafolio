@@ -57,6 +57,16 @@
   background: var(--color-accent);
 }
 
+/* Táctil: indicador del punto de contacto */
+.cursor-dot--touch {
+  width: var(--space-5);
+  height: var(--space-5);
+  opacity: 0;
+}
+.cursor-dot--touch.touching {
+  opacity: 0.45;
+}
+
 /* ===== Pill · etiqueta de habilidad (sobre fondo oscuro) ===== */
 .skill-pill {
   font-family: var(--font-mono);

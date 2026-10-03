@@ -30,7 +30,6 @@ section {
   /* Cursor del sistema en táctil */
   body { cursor: auto; }
   a, button { cursor: pointer; }
-  .cursor-dot { display: none; }
 
   /* Hero: botones a 100% del contenedor, apilados */
   .hero-actions {
