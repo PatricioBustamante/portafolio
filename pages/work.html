@@ -2,17 +2,97 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../assets/isotipo-personal.svg">
 <title data-i18n="meta.workTitle">Proyectos — Patricio Bustamante</title>
 <meta name="description" data-i18n-attr="content:meta.workDesc" content="Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.">
 <meta name="keywords" content="Diseñador de Producto, Portafolio, Proyectos, UX/UI, Sistemas de Diseño, Chile">
 <meta name="author" content="Patricio Bustamante">
+<!-- seo:start · generado por scripts/build-seo.mjs -->
+<link rel="canonical" href="https://patriciobustamante.github.io/portafolio/pages/work.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#fa3e33">
 
 <!-- Open Graph -->
-<meta property="og:title" data-i18n-attr="content:meta.workTitle" content="Proyectos — Patricio Bustamante">
-<meta property="og:description" data-i18n-attr="content:meta.workDesc" content="Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Patricio Bustamante">
+<meta property="og:locale" content="es_CL">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://patriciobustamante.github.io/portafolio/pages/work.html">
+<meta property="og:title" content="Proyectos — Patricio Bustamante">
+<meta property="og:description" content="Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.">
+<meta property="og:image" content="https://patriciobustamante.github.io/portafolio/assets/og-image.jpg">
+<meta property="og:image:alt" content="Proyectos — Patricio Bustamante">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Proyectos — Patricio Bustamante">
+<meta name="twitter:description" content="Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.">
+<meta name="twitter:image" content="https://patriciobustamante.github.io/portafolio/assets/og-image.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "url": "https://patriciobustamante.github.io/portafolio/pages/work.html",
+      "name": "Proyectos",
+      "author": {
+        "@id": "https://patriciobustamante.github.io/portafolio/#person"
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Nesto — Anticipos salariales",
+            "url": "https://patriciobustamante.github.io/portafolio/pages/nesto-betterfly.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Design System Library",
+            "url": "https://patriciobustamante.github.io/portafolio/pages/caja-los-andes.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Sitio Web Privado",
+            "url": "https://patriciobustamante.github.io/portafolio/pages/monte-de-piedad.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Onboarding / Enrolamiento",
+            "url": "https://patriciobustamante.github.io/portafolio/pages/betterfly-onboarding.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://patriciobustamante.github.io/portafolio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Proyectos",
+          "item": "https://patriciobustamante.github.io/portafolio/pages/work.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- seo:end -->
+
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,8 +160,8 @@
     </div>
     <div class="page-hero-meta" data-i18n-html="work.heroMeta">
       <span>Período</span>
-      2023 — 2026<br>
-      12 proyectos destacados
+      2021 — 2023<br>
+      4 proyectos destacados
     </div>
   </div>
 </section>
@@ -118,7 +198,8 @@
 </div>
 
 <!-- Projects -->
-<section class="projects-section with-padding" id="work">
+<section class="projects-section with-padding" id="work" aria-labelledby="work-list-title">
+  <h2 class="sr-only" id="work-list-title" data-i18n="work.listTitle">Lista de proyectos</h2>
   <div class="project-list reveal-stagger" data-projects="visible"></div>
 </section>
 
@@ -146,22 +227,22 @@
     </span>
   </a>
 
-  <div class="contact-grid reveal-stagger">
+  <address class="contact-grid reveal-stagger">
     <div class="contact-block">
-      <div class="contact-block-label" data-i18n="contact.location">Ubicación</div>
+      <h3 class="contact-block-label" data-i18n="contact.location">Ubicación</h3>
       <div class="contact-block-content" data-i18n-html="contact.locationContent">
         Concepción, Chile<br>
         Trabajando remoto<br>globalmente
       </div>
     </div>
     <div class="contact-block">
-      <div class="contact-block-label" data-i18n="contact.social">Social</div>
+      <h3 class="contact-block-label" data-i18n="contact.social">Social</h3>
       <div class="contact-block-content">
         <a href="https://linkedin.com/in/patrbustamante" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span><span class="sr-only" data-i18n="common.newWindow">(abre en nueva ventana)</span></a>
       </div>
     </div>
     <div class="contact-block">
-      <div class="contact-block-label" data-i18n="contact.services">Servicios</div>
+      <h3 class="contact-block-label" data-i18n="contact.services">Servicios</h3>
       <div class="contact-block-content" data-i18n-html="contact.servicesContent">
         Diseño de Producto<br>
         Sistemas de Diseño<br>
@@ -169,14 +250,14 @@
       </div>
     </div>
     <div class="contact-block">
-      <div class="contact-block-label" data-i18n="contact.currently">Actualmente</div>
+      <h3 class="contact-block-label" data-i18n="contact.currently">Actualmente</h3>
       <div class="contact-block-content">
         <span data-i18n-html="contact.currentlyLead">Aceptando proyectos<br>
         para Q3 — Q4 2026<br></span>
         <a href="#" aria-disabled="true" tabindex="-1"><span data-i18n="common.downloadCv">Descargar CV</span> <span aria-hidden="true">&#8599;</span></a>
       </div>
     </div>
-  </div>
+  </address>
 </section>
 
 </main>

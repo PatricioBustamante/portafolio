@@ -106,11 +106,12 @@ window.PB_DICT = {
     /* ── Work page ── */
     'meta.workTitle': 'Proyectos — Patricio Bustamante',
     'meta.workDesc': 'Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.',
-    'work.heroMeta': '<span>Período</span>2023 — 2026<br>12 proyectos destacados',
+    'work.heroMeta': '<span>Período</span>2021 — 2023<br>4 proyectos destacados',
+    'work.listTitle': 'Lista de proyectos',
 
     /* ── About page ── */
     'meta.aboutTitle': 'Sobre mí — Patricio Bustamante',
-    'meta.aboutDesc': 'Sobre Patricio Bustamante: Diseñador de Producto chileno con más de 8 años de experiencia en banca, retail, telecomunicaciones y seguros en entornos B2C, B2B y B2B2C.',
+    'meta.aboutDesc': 'Sobre Patricio Bustamante: Diseñador de Producto chileno con más de 9 años de experiencia en banca, retail, telecomunicaciones y seguros en entornos B2C, B2B y B2B2C.',
     'about.eyebrow': '02 — Sobre mí',
     'about.title': 'Sobre<br><em>mí</em>',
     'about.heroMeta': '<span>Base</span>Santiago, Chile<br>Disponible para proyectos remotos',
@@ -299,11 +300,12 @@ window.PB_DICT = {
     /* ── Work page ── */
     'meta.workTitle': 'Work — Patricio Bustamante',
     'meta.workDesc': 'A selection of recent product design, UX/UI and design systems work by Patricio Bustamante.',
-    'work.heroMeta': '<span>Period</span>2023 — 2026<br>12 featured projects',
+    'work.heroMeta': '<span>Period</span>2021 — 2023<br>4 featured projects',
+    'work.listTitle': 'Project list',
 
     /* ── About page ── */
     'meta.aboutTitle': 'About — Patricio Bustamante',
-    'meta.aboutDesc': 'About Patricio Bustamante: Chilean Product Designer with 8+ years of experience across banking, retail, telecom and insurance in B2C, B2B and B2B2C settings.',
+    'meta.aboutDesc': 'About Patricio Bustamante: Chilean Product Designer with 9+ years of experience across banking, retail, telecom and insurance in B2C, B2B and B2B2C settings.',
     'about.eyebrow': '02 — About',
     'about.title': 'About<br><em>me</em>',
     'about.heroMeta': '<span>Based in</span>Santiago, Chile<br>Available for remote projects',

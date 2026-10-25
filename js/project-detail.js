@@ -8,9 +8,11 @@
 
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
+  const slug = document.documentElement.dataset.slug || params.get('slug');
   const data = window.PROJECTS || {};
   const p = slug && data[slug];
+
+  if (p && !document.documentElement.dataset.slug) { window.location.replace(`${slug}.html`); return; }
 
   if (!p) { window.location.replace('work.html'); return; }
 
@@ -168,7 +170,7 @@
   const idx = order.indexOf(slug);
   const nextSlug = order[(idx + 1) % order.length];
   const nextLink = document.querySelector('[data-pj="next"]');
-  if (nextLink) nextLink.setAttribute('href', `proyecto.html?slug=${nextSlug}`);
+  if (nextLink) nextLink.setAttribute('href', `${nextSlug}.html`);
 
   render();
   document.addEventListener('pb:langchange', render);

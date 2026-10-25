@@ -11,7 +11,7 @@ class SiteFooter extends HTMLElement {
     const year = new Date().getFullYear();
 
     this.innerHTML = `
-<footer role="contentinfo">
+<footer>
   <a href="${base}index.html" class="footer-logo magnetic" data-i18n-attr="aria-label:footer.homeAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="footer-logo-mark" width="32" height="34">
   </a>

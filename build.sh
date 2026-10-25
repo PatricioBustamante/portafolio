@@ -11,3 +11,5 @@ echo "bundle.js OK"
 
 cat $I18N $COMPONENTS js/project-detail.js js/main.js > js/bundle-project.js
 echo "bundle-project.js OK"
+
+node scripts/build-seo.mjs

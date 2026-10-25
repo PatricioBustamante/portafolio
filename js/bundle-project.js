@@ -106,11 +106,12 @@ window.PB_DICT = {
     /* ── Work page ── */
     'meta.workTitle': 'Proyectos — Patricio Bustamante',
     'meta.workDesc': 'Selección de proyectos recientes de diseño de producto, UX/UI y sistemas de diseño por Patricio Bustamante.',
-    'work.heroMeta': '<span>Período</span>2023 — 2026<br>12 proyectos destacados',
+    'work.heroMeta': '<span>Período</span>2021 — 2023<br>4 proyectos destacados',
+    'work.listTitle': 'Lista de proyectos',
 
     /* ── About page ── */
     'meta.aboutTitle': 'Sobre mí — Patricio Bustamante',
-    'meta.aboutDesc': 'Sobre Patricio Bustamante: Diseñador de Producto chileno con más de 8 años de experiencia en banca, retail, telecomunicaciones y seguros en entornos B2C, B2B y B2B2C.',
+    'meta.aboutDesc': 'Sobre Patricio Bustamante: Diseñador de Producto chileno con más de 9 años de experiencia en banca, retail, telecomunicaciones y seguros en entornos B2C, B2B y B2B2C.',
     'about.eyebrow': '02 — Sobre mí',
     'about.title': 'Sobre<br><em>mí</em>',
     'about.heroMeta': '<span>Base</span>Santiago, Chile<br>Disponible para proyectos remotos',
@@ -299,11 +300,12 @@ window.PB_DICT = {
     /* ── Work page ── */
     'meta.workTitle': 'Work — Patricio Bustamante',
     'meta.workDesc': 'A selection of recent product design, UX/UI and design systems work by Patricio Bustamante.',
-    'work.heroMeta': '<span>Period</span>2023 — 2026<br>12 featured projects',
+    'work.heroMeta': '<span>Period</span>2021 — 2023<br>4 featured projects',
+    'work.listTitle': 'Project list',
 
     /* ── About page ── */
     'meta.aboutTitle': 'About — Patricio Bustamante',
-    'meta.aboutDesc': 'About Patricio Bustamante: Chilean Product Designer with 8+ years of experience across banking, retail, telecom and insurance in B2C, B2B and B2B2C settings.',
+    'meta.aboutDesc': 'About Patricio Bustamante: Chilean Product Designer with 9+ years of experience across banking, retail, telecom and insurance in B2C, B2B and B2B2C settings.',
     'about.eyebrow': '02 — About',
     'about.title': 'About<br><em>me</em>',
     'about.heroMeta': '<span>Based in</span>Santiago, Chile<br>Available for remote projects',
@@ -573,6 +575,7 @@ class SiteHeader extends HTMLElement {
     const isAbout = current === 'about' ? ' is-active' : '';
 
     this.innerHTML = `
+<header class="site-header">
 <nav class="nav" data-i18n-attr="aria-label:nav.aria">
   <a href="${base}index.html" class="nav-logo magnetic" data-i18n-attr="aria-label:nav.logoAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="nav-logo-mark" width="32" height="34">
@@ -600,7 +603,8 @@ class SiteHeader extends HTMLElement {
     <span class="nav-toggle-bar" aria-hidden="true"></span>
     <span class="nav-toggle-bar" aria-hidden="true"></span>
   </button>
-</nav>`;
+</nav>
+</header>`;
 
     if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
 
@@ -639,7 +643,7 @@ class SiteFooter extends HTMLElement {
     const year = new Date().getFullYear();
 
     this.innerHTML = `
-<footer role="contentinfo">
+<footer>
   <a href="${base}index.html" class="footer-logo magnetic" data-i18n-attr="aria-label:footer.homeAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="footer-logo-mark" width="32" height="34">
   </a>
@@ -693,8 +697,8 @@ class ProjectCard extends HTMLElement {
 
     const inSubpage = window.location.pathname.includes('/pages/');
     const href = inSubpage
-      ? `proyecto.html?slug=${slug}`
-      : `pages/proyecto.html?slug=${slug}`;
+      ? `${slug}.html`
+      : `pages/${slug}.html`;
 
     const esc = s => String(s)
       .replace(/&/g, '&amp;')
@@ -727,7 +731,7 @@ class ProjectCard extends HTMLElement {
       <span class="company-logo-mark" aria-hidden="true">${esc(initial)}</span>
       <span class="company-badge-name">${esc(p.company || '')}</span>
     </div>
-    <div class="project-title">${esc(title)}</div>
+    <h3 class="project-title">${esc(title)}</h3>
     <div class="project-subtitle">${esc(category)} &middot; ${esc(p.year)}</div>
   </div>
   <div class="project-desc">${esc(summary)}</div>
@@ -754,9 +758,11 @@ if (!customElements.get('project-card')) {
 
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
+  const slug = document.documentElement.dataset.slug || params.get('slug');
   const data = window.PROJECTS || {};
   const p = slug && data[slug];
+
+  if (p && !document.documentElement.dataset.slug) { window.location.replace(`${slug}.html`); return; }
 
   if (!p) { window.location.replace('work.html'); return; }
 
@@ -914,7 +920,7 @@ if (!customElements.get('project-card')) {
   const idx = order.indexOf(slug);
   const nextSlug = order[(idx + 1) % order.length];
   const nextLink = document.querySelector('[data-pj="next"]');
-  if (nextLink) nextLink.setAttribute('href', `proyecto.html?slug=${nextSlug}`);
+  if (nextLink) nextLink.setAttribute('href', `${nextSlug}.html`);
 
   render();
   document.addEventListener('pb:langchange', render);

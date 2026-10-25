@@ -27,6 +27,7 @@ class SiteHeader extends HTMLElement {
     const isAbout = current === 'about' ? ' is-active' : '';
 
     this.innerHTML = `
+<header class="site-header">
 <nav class="nav" data-i18n-attr="aria-label:nav.aria">
   <a href="${base}index.html" class="nav-logo magnetic" data-i18n-attr="aria-label:nav.logoAria">
     <img src="${base}assets/isotipo-personal.svg" alt="" class="nav-logo-mark" width="32" height="34">
@@ -54,7 +55,8 @@ class SiteHeader extends HTMLElement {
     <span class="nav-toggle-bar" aria-hidden="true"></span>
     <span class="nav-toggle-bar" aria-hidden="true"></span>
   </button>
-</nav>`;
+</nav>
+</header>`;
 
     if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
 

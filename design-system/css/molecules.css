@@ -460,6 +460,7 @@ project-card > .project { border-bottom: none; }
 }
 .skills-strip-label {
   font-family: var(--font-mono);
+  font-weight: inherit;
   font-size: var(--text-2xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-mega);
@@ -528,6 +529,7 @@ project-card > .project { border-bottom: none; }
 /* ===== Contact block · label + contenido ===== */
 .contact-block-label {
   font-family: var(--font-mono);
+  font-weight: inherit;
   font-size: var(--text-2xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-mega);

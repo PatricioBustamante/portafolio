@@ -33,8 +33,8 @@ class ProjectCard extends HTMLElement {
 
     const inSubpage = window.location.pathname.includes('/pages/');
     const href = inSubpage
-      ? `proyecto.html?slug=${slug}`
-      : `pages/proyecto.html?slug=${slug}`;
+      ? `${slug}.html`
+      : `pages/${slug}.html`;
 
     const esc = s => String(s)
       .replace(/&/g, '&amp;')
@@ -67,7 +67,7 @@ class ProjectCard extends HTMLElement {
       <span class="company-logo-mark" aria-hidden="true">${esc(initial)}</span>
       <span class="company-badge-name">${esc(p.company || '')}</span>
     </div>
-    <div class="project-title">${esc(title)}</div>
+    <h3 class="project-title">${esc(title)}</h3>
     <div class="project-subtitle">${esc(category)} &middot; ${esc(p.year)}</div>
   </div>
   <div class="project-desc">${esc(summary)}</div>

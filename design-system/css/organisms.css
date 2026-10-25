@@ -402,6 +402,8 @@
   display: flex;
   flex-direction: column;
   margin-top: var(--space-3);
+  padding: 0;
+  list-style: none;
 }
 
 /* ===== Contact · sección de cierre ===== */
@@ -443,6 +445,7 @@
 }
 .contact-grid {
   display: grid;
+  font-style: normal;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-6);
   margin-top: var(--space-15);
