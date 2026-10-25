@@ -13,16 +13,19 @@
    ============================================ */
 
 class ProjectCard extends HTMLElement {
+  // Al insertarse, dibuja la tarjeta y la redibuja cada vez que cambia el idioma.
   connectedCallback() {
     this.render();
     this._onLang = () => this.render();
     document.addEventListener('pb:langchange', this._onLang);
   }
 
+  // Al quitarse de la página, deja de escuchar los cambios de idioma.
   disconnectedCallback() {
     if (this._onLang) document.removeEventListener('pb:langchange', this._onLang);
   }
 
+  // Arma el enlace de la fila del proyecto: número, empresa, título, categoría, resumen y etiquetas.
   render() {
     const slug = this.getAttribute('slug');
     const p = window.PROJECTS && window.PROJECTS[slug];

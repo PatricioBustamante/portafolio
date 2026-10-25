@@ -6,29 +6,35 @@
    Re-renderiza al emitirse 'pb:langchange'.
    ============================================ */
 
+// Rellena la página de un proyecto con los datos de projects-data.js según su slug.
 (function () {
   const params = new URLSearchParams(window.location.search);
   const slug = document.documentElement.dataset.slug || params.get('slug');
   const data = window.PROJECTS || {};
   const p = slug && data[slug];
 
+  // Enlaces antiguos (proyecto.html?slug=…) redirigen a la página estática del proyecto.
   if (p && !document.documentElement.dataset.slug) { window.location.replace(`${slug}.html`); return; }
 
+  // Si el proyecto no existe, vuelve a la lista de proyectos.
   if (!p) { window.location.replace('work.html'); return; }
 
   const L = v => (window.PB_I18N ? window.PB_I18N.localize(v) : v);
   const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
+  // Escapa caracteres HTML para insertar texto de forma segura.
   const esc = s => String(s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+  // Escribe un texto en todos los elementos con data-pj="key".
   const set = (key, value) => {
     document.querySelectorAll(`[data-pj="${key}"]`).forEach(el => {
       el.textContent = value;
     });
   };
 
+  // Pinta todos los textos del proyecto en el idioma actual; se vuelve a ejecutar al cambiar de idioma.
   function render() {
     const title = L(p.title);
 
@@ -135,6 +141,7 @@
   }
 
   // ── Cover (una sola vez, no depende del idioma) ──
+  // Inserta la imagen de portada, o un fondo de color si no hay imagen.
   const cover = document.getElementById('pj-cover');
   if (cover) {
     if (p.coverImage) {
@@ -149,6 +156,7 @@
   }
 
   // ── Imágenes + Embeds (una sola vez) ─────────────
+  // Agrega la galería de imágenes y los embeds (ej. Figma) del proyecto.
   const imagesHost = document.querySelector('[data-pj="images"]');
   if (imagesHost) {
     const items = [];

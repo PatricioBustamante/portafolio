@@ -17,6 +17,7 @@ const PB_FLAG_ES = `<svg class="lang-flag" viewBox="0 0 900 600" aria-hidden="tr
 const PB_FLAG_EN = `<svg class="lang-flag" viewBox="0 0 190 100" aria-hidden="true" focusable="false"><rect width="190" height="100" fill="#fff"/><g fill="#B22234"><rect width="190" height="7.7"/><rect y="15.4" width="190" height="7.7"/><rect y="30.8" width="190" height="7.7"/><rect y="46.2" width="190" height="7.7"/><rect y="61.5" width="190" height="7.7"/><rect y="76.9" width="190" height="7.7"/><rect y="92.3" width="190" height="7.7"/></g><rect width="76" height="53.8" fill="#3C3B6E"/><g fill="#fff"><circle cx="12" cy="13" r="3.4"/><circle cx="26" cy="13" r="3.4"/><circle cx="40" cy="13" r="3.4"/><circle cx="54" cy="13" r="3.4"/><circle cx="68" cy="13" r="3.4"/><circle cx="19" cy="27" r="3.4"/><circle cx="33" cy="27" r="3.4"/><circle cx="47" cy="27" r="3.4"/><circle cx="61" cy="27" r="3.4"/><circle cx="12" cy="41" r="3.4"/><circle cx="26" cy="41" r="3.4"/><circle cx="40" cy="41" r="3.4"/><circle cx="54" cy="41" r="3.4"/><circle cx="68" cy="41" r="3.4"/></g></svg>`;
 
 class SiteHeader extends HTMLElement {
+  // Se ejecuta al insertar <site-header>: arma el menú con rutas según la página y conecta el selector de idioma.
   connectedCallback() {
     const current = (this.getAttribute('current') || '').toLowerCase();
     const inSubpage = window.location.pathname.includes('/pages/');
@@ -61,6 +62,7 @@ class SiteHeader extends HTMLElement {
     if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
 
     const opts = Array.from(this.querySelectorAll('.lang-opt'));
+    // Marca como activa la bandera del idioma actual.
     const syncActive = () => {
       const active = window.PB_I18N ? window.PB_I18N.lang : 'es';
       opts.forEach(btn => {

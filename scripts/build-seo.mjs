@@ -13,9 +13,13 @@ vm.runInNewContext(fs.readFileSync('js/projects-data.js', 'utf8'), ctx);
 const PROJECTS = ctx.window.PROJECTS;
 const visible = Object.entries(PROJECTS).filter(([, p]) => p.visibleProject);
 
+// Devuelve la versión en español de un campo { es, en } (o el valor tal cual).
 const es = v => (v && typeof v === 'object' && 'es' in v ? v.es : v) || '';
+// Escapa texto para usarlo dentro de un atributo HTML.
 const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+// Escapa texto para usarlo como contenido HTML.
 const text = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// Convierte una ruta relativa de assets en URL absoluta del sitio.
 const absAsset = rel => BASE + rel.replace(/^(\.\.\/)+/, '');
 
 const person = {
@@ -28,11 +32,13 @@ const person = {
     'Estrategia de Producto', 'Arquitectura de Información', 'Banca Digital', 'Fintech'],
 };
 
+// Datos estructurados de migas de pan (Inicio / Sección / Página) para Google.
 const breadcrumbs = items => ({
   '@type': 'BreadcrumbList',
   itemListElement: items.map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })),
 });
 
+// Genera el bloque SEO del <head>: canonical, Open Graph, Twitter y JSON-LD.
 function headBlock({ url, title, desc, type = 'website', image = OG_IMAGE, graph }) {
   const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2).replace(/</g, '\\u003c');
   return `<!-- seo:start · generado por scripts/build-seo.mjs -->
@@ -63,6 +69,7 @@ ${json}
 <!-- seo:end -->`;
 }
 
+// Reemplaza lo que haya entre <!-- seo:start --> y <!-- seo:end --> por un bloque nuevo.
 const withHead = (html, cfg) => html.replace(/<!-- seo:start[\s\S]*?<!-- seo:end -->/, headBlock(cfg));
 
 const staticPages = {
@@ -112,6 +119,7 @@ const staticPages = {
   },
 };
 
+// Actualiza el <head> de inicio, "Sobre mí" y "Proyectos".
 for (const [file, cfg] of Object.entries(staticPages)) {
   fs.writeFileSync(file, withHead(fs.readFileSync(file, 'utf8'), cfg));
 }
@@ -119,6 +127,7 @@ for (const [file, cfg] of Object.entries(staticPages)) {
 // proyecto.html queda como plantilla y redirección de enlaces antiguos (?slug=)
 const template = fs.readFileSync('pages/proyecto.html', 'utf8');
 
+// Crea pages/<slug>.html por proyecto a partir de la plantilla, con título, H1 y resumen ya escritos para buscadores.
 for (const [slug, p] of visible) {
   const url = `${BASE}pages/${slug}.html`;
   const title = `${es(p.title)} — Patricio Bustamante`;
@@ -150,6 +159,7 @@ for (const [slug, p] of visible) {
   fs.writeFileSync(`pages/${slug}.html`, html);
 }
 
+// Escribe sitemap.xml con todas las páginas públicas.
 const urls = [BASE, BASE + 'pages/work.html', BASE + 'pages/about.html', ...visible.map(([slug]) => `${BASE}pages/${slug}.html`)];
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>

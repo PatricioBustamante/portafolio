@@ -20,6 +20,7 @@
   const SUPPORTED = ['es', 'en'];
   const DEFAULT = 'es';
 
+  // Lee ?lang= de la URL; devuelve el idioma si es válido o null.
   function paramLang() {
     try {
       const p = new URLSearchParams(window.location.search).get('lang');
@@ -28,6 +29,7 @@
     return null;
   }
 
+  // Decide el idioma inicial: URL → preferencia guardada → idioma del navegador → español.
   function detect() {
     const fromUrl = paramLang();
     if (fromUrl) {
@@ -45,8 +47,10 @@
 
   let lang = detect();
 
+  // Diccionario de textos (definido en i18n-dict.js).
   function dict() { return window.PB_DICT || {}; }
 
+  // Traduce una clave al idioma actual; si falta, usa español y, en último caso, la clave misma.
   function t(key) {
     const d = dict();
     const table = d[lang] || {};
@@ -65,6 +69,7 @@
     return value;
   }
 
+  // Reemplaza textos, HTML y atributos marcados con data-i18n* dentro de root (o toda la página).
   function applyTranslations(root) {
     root = root || document;
     root.querySelectorAll('[data-i18n]').forEach(el => {
@@ -84,6 +89,7 @@
     });
   }
 
+  // Actualiza <html lang> para lectores de pantalla y buscadores.
   function updateHtmlLang() { document.documentElement.lang = lang; }
 
   // Refleja el idioma elegido en la URL (?lang=) sin recargar
@@ -120,6 +126,7 @@
     make('x-default', null);
   }
 
+  // Cambia de idioma: guarda la preferencia, retraduce la página y avisa con el evento pb:langchange.
   function setLang(next) {
     if (!SUPPORTED.includes(next) || next === lang) return;
     lang = next;
@@ -130,6 +137,7 @@
     document.dispatchEvent(new CustomEvent('pb:langchange', { detail: { lang } }));
   }
 
+  // Alterna entre español e inglés.
   function toggle() { setLang(lang === 'es' ? 'en' : 'es'); }
 
   window.PB_I18N = {
@@ -139,6 +147,7 @@
   };
 
   updateHtmlLang();
+  // Traduce la página al cargar y crea los enlaces hreflang.
   function init() {
     applyTranslations(document);
     updateAlternates();

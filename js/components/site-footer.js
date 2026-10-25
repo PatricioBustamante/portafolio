@@ -5,6 +5,7 @@
    ============================================ */
 
 class SiteFooter extends HTMLElement {
+  // Se ejecuta al insertar <site-footer>: arma el pie de página con el año actual y rutas correctas.
   connectedCallback() {
     const inSubpage = window.location.pathname.includes('/pages/');
     const base = inSubpage ? '../' : '';

@@ -417,6 +417,7 @@ window.PB_DICT = {
   const SUPPORTED = ['es', 'en'];
   const DEFAULT = 'es';
 
+  // Lee ?lang= de la URL; devuelve el idioma si es válido o null.
   function paramLang() {
     try {
       const p = new URLSearchParams(window.location.search).get('lang');
@@ -425,6 +426,7 @@ window.PB_DICT = {
     return null;
   }
 
+  // Decide el idioma inicial: URL → preferencia guardada → idioma del navegador → español.
   function detect() {
     const fromUrl = paramLang();
     if (fromUrl) {
@@ -442,8 +444,10 @@ window.PB_DICT = {
 
   let lang = detect();
 
+  // Diccionario de textos (definido en i18n-dict.js).
   function dict() { return window.PB_DICT || {}; }
 
+  // Traduce una clave al idioma actual; si falta, usa español y, en último caso, la clave misma.
   function t(key) {
     const d = dict();
     const table = d[lang] || {};
@@ -462,6 +466,7 @@ window.PB_DICT = {
     return value;
   }
 
+  // Reemplaza textos, HTML y atributos marcados con data-i18n* dentro de root (o toda la página).
   function applyTranslations(root) {
     root = root || document;
     root.querySelectorAll('[data-i18n]').forEach(el => {
@@ -481,6 +486,7 @@ window.PB_DICT = {
     });
   }
 
+  // Actualiza <html lang> para lectores de pantalla y buscadores.
   function updateHtmlLang() { document.documentElement.lang = lang; }
 
   // Refleja el idioma elegido en la URL (?lang=) sin recargar
@@ -517,6 +523,7 @@ window.PB_DICT = {
     make('x-default', null);
   }
 
+  // Cambia de idioma: guarda la preferencia, retraduce la página y avisa con el evento pb:langchange.
   function setLang(next) {
     if (!SUPPORTED.includes(next) || next === lang) return;
     lang = next;
@@ -527,6 +534,7 @@ window.PB_DICT = {
     document.dispatchEvent(new CustomEvent('pb:langchange', { detail: { lang } }));
   }
 
+  // Alterna entre español e inglés.
   function toggle() { setLang(lang === 'es' ? 'en' : 'es'); }
 
   window.PB_I18N = {
@@ -536,6 +544,7 @@ window.PB_DICT = {
   };
 
   updateHtmlLang();
+  // Traduce la página al cargar y crea los enlaces hreflang.
   function init() {
     applyTranslations(document);
     updateAlternates();
@@ -565,6 +574,7 @@ const PB_FLAG_ES = `<svg class="lang-flag" viewBox="0 0 900 600" aria-hidden="tr
 const PB_FLAG_EN = `<svg class="lang-flag" viewBox="0 0 190 100" aria-hidden="true" focusable="false"><rect width="190" height="100" fill="#fff"/><g fill="#B22234"><rect width="190" height="7.7"/><rect y="15.4" width="190" height="7.7"/><rect y="30.8" width="190" height="7.7"/><rect y="46.2" width="190" height="7.7"/><rect y="61.5" width="190" height="7.7"/><rect y="76.9" width="190" height="7.7"/><rect y="92.3" width="190" height="7.7"/></g><rect width="76" height="53.8" fill="#3C3B6E"/><g fill="#fff"><circle cx="12" cy="13" r="3.4"/><circle cx="26" cy="13" r="3.4"/><circle cx="40" cy="13" r="3.4"/><circle cx="54" cy="13" r="3.4"/><circle cx="68" cy="13" r="3.4"/><circle cx="19" cy="27" r="3.4"/><circle cx="33" cy="27" r="3.4"/><circle cx="47" cy="27" r="3.4"/><circle cx="61" cy="27" r="3.4"/><circle cx="12" cy="41" r="3.4"/><circle cx="26" cy="41" r="3.4"/><circle cx="40" cy="41" r="3.4"/><circle cx="54" cy="41" r="3.4"/><circle cx="68" cy="41" r="3.4"/></g></svg>`;
 
 class SiteHeader extends HTMLElement {
+  // Se ejecuta al insertar <site-header>: arma el menú con rutas según la página y conecta el selector de idioma.
   connectedCallback() {
     const current = (this.getAttribute('current') || '').toLowerCase();
     const inSubpage = window.location.pathname.includes('/pages/');
@@ -609,6 +619,7 @@ class SiteHeader extends HTMLElement {
     if (window.PB_I18N) window.PB_I18N.applyTranslations(this);
 
     const opts = Array.from(this.querySelectorAll('.lang-opt'));
+    // Marca como activa la bandera del idioma actual.
     const syncActive = () => {
       const active = window.PB_I18N ? window.PB_I18N.lang : 'es';
       opts.forEach(btn => {
@@ -637,6 +648,7 @@ if (!customElements.get('site-header')) {
    ============================================ */
 
 class SiteFooter extends HTMLElement {
+  // Se ejecuta al insertar <site-footer>: arma el pie de página con el año actual y rutas correctas.
   connectedCallback() {
     const inSubpage = window.location.pathname.includes('/pages/');
     const base = inSubpage ? '../' : '';
@@ -677,16 +689,19 @@ if (!customElements.get('site-footer')) {
    ============================================ */
 
 class ProjectCard extends HTMLElement {
+  // Al insertarse, dibuja la tarjeta y la redibuja cada vez que cambia el idioma.
   connectedCallback() {
     this.render();
     this._onLang = () => this.render();
     document.addEventListener('pb:langchange', this._onLang);
   }
 
+  // Al quitarse de la página, deja de escuchar los cambios de idioma.
   disconnectedCallback() {
     if (this._onLang) document.removeEventListener('pb:langchange', this._onLang);
   }
 
+  // Arma el enlace de la fila del proyecto: número, empresa, título, categoría, resumen y etiquetas.
   render() {
     const slug = this.getAttribute('slug');
     const p = window.PROJECTS && window.PROJECTS[slug];
@@ -756,29 +771,35 @@ if (!customElements.get('project-card')) {
    Re-renderiza al emitirse 'pb:langchange'.
    ============================================ */
 
+// Rellena la página de un proyecto con los datos de projects-data.js según su slug.
 (function () {
   const params = new URLSearchParams(window.location.search);
   const slug = document.documentElement.dataset.slug || params.get('slug');
   const data = window.PROJECTS || {};
   const p = slug && data[slug];
 
+  // Enlaces antiguos (proyecto.html?slug=…) redirigen a la página estática del proyecto.
   if (p && !document.documentElement.dataset.slug) { window.location.replace(`${slug}.html`); return; }
 
+  // Si el proyecto no existe, vuelve a la lista de proyectos.
   if (!p) { window.location.replace('work.html'); return; }
 
   const L = v => (window.PB_I18N ? window.PB_I18N.localize(v) : v);
   const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
+  // Escapa caracteres HTML para insertar texto de forma segura.
   const esc = s => String(s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+  // Escribe un texto en todos los elementos con data-pj="key".
   const set = (key, value) => {
     document.querySelectorAll(`[data-pj="${key}"]`).forEach(el => {
       el.textContent = value;
     });
   };
 
+  // Pinta todos los textos del proyecto en el idioma actual; se vuelve a ejecutar al cambiar de idioma.
   function render() {
     const title = L(p.title);
 
@@ -885,6 +906,7 @@ if (!customElements.get('project-card')) {
   }
 
   // ── Cover (una sola vez, no depende del idioma) ──
+  // Inserta la imagen de portada, o un fondo de color si no hay imagen.
   const cover = document.getElementById('pj-cover');
   if (cover) {
     if (p.coverImage) {
@@ -899,6 +921,7 @@ if (!customElements.get('project-card')) {
   }
 
   // ── Imágenes + Embeds (una sola vez) ─────────────
+  // Agrega la galería de imágenes y los embeds (ej. Figma) del proyecto.
   const imagesHost = document.querySelector('[data-pj="images"]');
   if (imagesHost) {
     const items = [];
@@ -926,6 +949,7 @@ if (!customElements.get('project-card')) {
   document.addEventListener('pb:langchange', render);
 })();
 // ===== Auto-render project lists =====
+// Llena cada contenedor [data-projects] con tarjetas: "recent" muestra solo los recientes, el resto todos los visibles.
 (function renderProjectLists() {
   const projects = window.PROJECTS || {};
   document.querySelectorAll('[data-projects]').forEach(container => {
@@ -947,11 +971,13 @@ const finePointer = window.matchMedia('(pointer: fine)');
 const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
 // ===== Disable browser zoom (keyboard + scroll) =====
+// Bloquea Ctrl/Cmd + "+", "-" y "0" para que el diseño no se desarme con zoom de teclado.
 document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey) {
     if (['+', '-', '=', '_', '0'].includes(e.key)) e.preventDefault();
   }
 }, { passive: false });
+// Bloquea el zoom con Ctrl + rueda del mouse.
 document.addEventListener('wheel', e => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
@@ -960,6 +986,7 @@ document.addEventListener('wheel', e => {
 const loaderBar = document.getElementById('loaderBar');
 const loader = document.getElementById('loader');
 
+// Oculta la pantalla de carga con su animación de salida.
 function finishLoader() {
   if (!loader) return;
   loader.classList.add('done');
@@ -972,6 +999,7 @@ if (reduceMotion.matches) {
   finishLoader();
 } else {
   let progress = 0;
+  // Avanza la barra de carga a saltos aleatorios hasta 100% y luego cierra el loader.
   const loaderInterval = setInterval(() => {
     progress += Math.random() * 12 + 3;
     if (progress >= 100) {
@@ -988,15 +1016,18 @@ const cursor = document.getElementById('cursor');
 const CURSOR_PREF_KEY = 'pb:cursor';
 const cursorSupported = cursor && finePointer.matches && !reduceMotion.matches;
 
+// Lee si el visitante apagó el cursor personalizado (guardado en el navegador).
 function readCursorPref() {
   try { return localStorage.getItem(CURSOR_PREF_KEY); } catch { return null; }
 }
+// Guarda la preferencia del cursor ("on"/"off").
 function writeCursorPref(val) {
   try { localStorage.setItem(CURSOR_PREF_KEY, val); } catch {}
 }
 
 let cursorEnabled = cursorSupported && readCursorPref() !== 'off';
 
+// Muestra u oculta el cursor personalizado y actualiza el texto del botón del footer.
 function applyCursorState() {
   if (cursorEnabled) {
     cursor.style.display = '';
@@ -1023,11 +1054,13 @@ if (cursorSupported) {
   let cursorX = 0, cursorY = 0;
   let cursorLastTime = 0;
 
+  // Registra la posición real del mouse; el punto la sigue en cursorTick.
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
 
+  // Mueve el punto hacia el mouse con suavizado (efecto de retraso), independiente de los FPS.
   cursorTick = function(timestamp) {
     const delta = cursorLastTime ? Math.min(timestamp - cursorLastTime, 50) : 16.67;
     cursorLastTime = timestamp;
@@ -1040,15 +1073,18 @@ if (cursorSupported) {
   };
   cursorRafId = requestAnimationFrame(cursorTick);
 
+  // Sobre enlaces y botones el punto se agranda a un anillo.
   document.querySelectorAll('a, button, .project, .magnetic').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
+  // Sobre textos el punto se convierte en una barra tipo cursor de texto.
   document.querySelectorAll('p, .about-body, .hero-intro').forEach(el => {
     el.addEventListener('mouseenter', () => { cursor.classList.add('text'); cursor.classList.remove('hover'); });
     el.addEventListener('mouseleave', () => cursor.classList.remove('text'));
   });
 
+  // Al navegar con Tab vuelve el cursor normal; al mover el mouse regresa el personalizado.
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab' && cursorEnabled) document.body.classList.remove('has-custom-cursor');
   });
@@ -1060,6 +1096,7 @@ if (cursorSupported) {
 // Táctil: el punto marca dónde toca el dedo
 if (cursor && !finePointer.matches) {
   cursor.classList.add('cursor-dot--touch');
+  // Coloca el punto donde está el dedo y lo hace visible.
   const showTouch = (e) => {
     const point = e.touches[0];
     if (!point) return;
@@ -1067,6 +1104,7 @@ if (cursor && !finePointer.matches) {
     cursor.style.top = point.clientY + 'px';
     cursor.classList.add('touching');
   };
+  // Oculta el punto al levantar el dedo.
   const hideTouch = () => cursor.classList.remove('touching');
   document.addEventListener('touchstart', showTouch, { passive: true });
   document.addEventListener('touchmove', showTouch, { passive: true });
@@ -1074,6 +1112,7 @@ if (cursor && !finePointer.matches) {
   document.addEventListener('touchcancel', hideTouch, { passive: true });
 }
 
+// Botón del footer para activar/desactivar el cursor; se oculta si el dispositivo no lo soporta.
 document.querySelectorAll('.cursor-toggle').forEach(btn => {
   if (!cursorSupported) { btn.hidden = true; return; }
   btn.addEventListener('click', () => {
@@ -1086,6 +1125,7 @@ document.querySelectorAll('.cursor-toggle').forEach(btn => {
 applyCursorState();
 
 // Pausa los bucles rAF cuando el usuario cambia de tab
+// Detiene la animación del cursor cuando la pestaña no está visible, para ahorrar batería.
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     if (cursorRafId) { cancelAnimationFrame(cursorRafId); cursorRafId = null; }
@@ -1096,6 +1136,7 @@ document.addEventListener('visibilitychange', () => {
 
 // ===== Magnetic Buttons =====
 if (finePointer.matches && !reduceMotion.matches) {
+  // Botones magnéticos: se desplazan levemente hacia el mouse y vuelven a su lugar al salir.
   document.querySelectorAll('.magnetic').forEach(el => {
     el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
@@ -1111,6 +1152,7 @@ if (finePointer.matches && !reduceMotion.matches) {
 if (reduceMotion.matches) {
   document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('visible'));
 } else {
+  // Agrega .visible a los elementos .reveal* cuando entran en pantalla para animar su aparición.
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -1131,6 +1173,7 @@ if (reduceMotion.matches) {
 const heroMark = document.querySelector('.hero-mark');
 if (heroMark && !reduceMotion.matches) {
   let parallaxFrame = null;
+  // Desplaza el logo decorativo del hero según el scroll (máximo una vez por frame).
   function updateParallax() {
     parallaxFrame = null;
     const ratio = Math.min(window.scrollY / window.innerHeight, 1);
@@ -1144,6 +1187,7 @@ if (heroMark && !reduceMotion.matches) {
 }
 
 // ===== Count-up animation =====
+// Anima un número desde 0 hasta target con desaceleración; respeta el sufijo (ej. "+").
 function animateCountUp(el, target, duration = 1400) {
   if (reduceMotion.matches) { el.textContent = target + (el.dataset.suffix || ''); return; }
   const suffix = el.dataset.suffix || '';
@@ -1159,6 +1203,7 @@ function animateCountUp(el, target, duration = 1400) {
 
 const statNumbers = document.querySelectorAll('.stat-number');
 if (statNumbers.length) {
+  // Inicia el conteo de cada cifra la primera vez que se ve en pantalla.
   const statObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -1175,6 +1220,7 @@ if (statNumbers.length) {
 }
 
 // ===== Smooth Scroll =====
+// Enlaces internos (#seccion): scroll suave y foco en la sección destino para accesibilidad.
 document.querySelectorAll('.nav-links a, .nav-logo').forEach(link => {
   link.addEventListener('click', (e) => {
     const href = link.getAttribute('href');
@@ -1191,6 +1237,7 @@ document.querySelectorAll('.nav-links a, .nav-logo').forEach(link => {
 });
 
 // ===== Local Time =====
+// Muestra en el footer la hora actual de Chile, actualizada cada segundo.
 function updateTime() {
   const el = document.getElementById('localTime');
   if (!el) return;
@@ -1206,6 +1253,7 @@ setInterval(updateTime, 1000);
 const navToggle = document.getElementById('navToggle');
 const navLinksEl = document.getElementById('navLinks');
 
+// Abre o cierra el menú móvil, actualiza su estado accesible y mueve el foco.
 function setMenuOpen(open) {
   document.body.classList.toggle('menu-open', open);
   if (navToggle) {
@@ -1220,6 +1268,7 @@ function setMenuOpen(open) {
   }
 }
 
+// Con el menú móvil abierto, mantiene el foco del teclado dentro del menú.
 function trapMenuFocus(e) {
   if (!document.body.classList.contains('menu-open') || e.key !== 'Tab') return;
   const focusables = [navToggle, ...navLinksEl.querySelectorAll('a')].filter(Boolean);
@@ -1235,6 +1284,7 @@ function trapMenuFocus(e) {
 }
 
 if (navToggle && navLinksEl) {
+  // Abre/cierra con el botón; cierra al elegir un enlace, con Escape o al pasar a escritorio.
   navToggle.addEventListener('click', () => setMenuOpen(!document.body.classList.contains('menu-open')));
   navLinksEl.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
   document.addEventListener('keydown', (e) => {
@@ -1248,6 +1298,7 @@ if (navToggle && navLinksEl) {
 const nav = document.querySelector('.nav');
 if (nav) {
   const navScrollMQ = window.matchMedia('(min-width: 769px)');
+  // En escritorio compacta la barra de navegación al bajar más de 100px.
   window.addEventListener('scroll', () => {
     if (!navScrollMQ.matches) { nav.style.padding = ''; return; }
     nav.style.padding = window.scrollY > 100
