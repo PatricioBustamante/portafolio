@@ -915,6 +915,7 @@ if (!customElements.get('project-card')) {
       img.alt = L(p.title);
       img.loading = 'lazy';
       cover.prepend(img);
+      cover.classList.add('has-img');
     } else if (p.preview) {
       cover.classList.add('preview-' + p.preview);
     }
@@ -932,10 +933,13 @@ if (!customElements.get('project-card')) {
     }
     if (Array.isArray(p.embeds) && p.embeds.length > 0) {
       items.push(...p.embeds.map(url =>
-        `<div class="pj-embed-item"><iframe src="${esc(url)}" allowfullscreen loading="lazy"></iframe></div>`
+        `<div class="pj-embed-item"><iframe src="${esc(url)}" title="${esc(L(p.title))} · Figma" allowfullscreen loading="lazy"></iframe></div>`
       ));
     }
-    if (items.length > 0) imagesHost.innerHTML = items.join('');
+    if (items.length > 0) {
+      imagesHost.innerHTML = items.join('');
+      imagesHost.closest('.pj-images')?.classList.add('has-items');
+    }
   }
 
   // ── Enlace "siguiente proyecto" (href, una sola vez) ──
@@ -969,18 +973,6 @@ const finePointer = window.matchMedia('(pointer: fine)');
 
 // i18n helper (PB_I18N se carga antes que bundle.js)
 const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
-
-// ===== Disable browser zoom (keyboard + scroll) =====
-// Bloquea Ctrl/Cmd + "+", "-" y "0" para que el diseño no se desarme con zoom de teclado.
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey || e.metaKey) {
-    if (['+', '-', '=', '_', '0'].includes(e.key)) e.preventDefault();
-  }
-}, { passive: false });
-// Bloquea el zoom con Ctrl + rueda del mouse.
-document.addEventListener('wheel', e => {
-  if (e.ctrlKey) e.preventDefault();
-}, { passive: false });
 
 // ===== Loader =====
 const loaderBar = document.getElementById('loaderBar');

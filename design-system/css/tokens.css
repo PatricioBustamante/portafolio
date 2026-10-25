@@ -120,7 +120,8 @@
   --display-sm: clamp(36px, 5vw, 72px);
   --display-md: clamp(42px, 6.5vw, 96px);
   --display-lg: clamp(48px, 9vw, 140px);
-  --display-xl: clamp(52px, 11vw, 180px);
+  --display-xl: clamp(52px, min(11vw, 14vh), 180px);
+  --display-xl: clamp(52px, min(11vw, 14dvh), 180px);
 
   /* ===== Typography · Weights ===== */
   --weight-light: 300;

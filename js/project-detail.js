@@ -150,6 +150,7 @@
       img.alt = L(p.title);
       img.loading = 'lazy';
       cover.prepend(img);
+      cover.classList.add('has-img');
     } else if (p.preview) {
       cover.classList.add('preview-' + p.preview);
     }
@@ -167,10 +168,13 @@
     }
     if (Array.isArray(p.embeds) && p.embeds.length > 0) {
       items.push(...p.embeds.map(url =>
-        `<div class="pj-embed-item"><iframe src="${esc(url)}" allowfullscreen loading="lazy"></iframe></div>`
+        `<div class="pj-embed-item"><iframe src="${esc(url)}" title="${esc(L(p.title))} · Figma" allowfullscreen loading="lazy"></iframe></div>`
       ));
     }
-    if (items.length > 0) imagesHost.innerHTML = items.join('');
+    if (items.length > 0) {
+      imagesHost.innerHTML = items.join('');
+      imagesHost.closest('.pj-images')?.classList.add('has-items');
+    }
   }
 
   // ── Enlace "siguiente proyecto" (href, una sola vez) ──

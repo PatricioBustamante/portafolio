@@ -89,6 +89,7 @@
   border: 0;
   border-radius: var(--radius-pill);
   padding: var(--space-h) var(--space-1);
+  min-height: 24px;                    /* WCAG 2.5.8 · área táctil mínima */
   line-height: 1;
   cursor: pointer;
   transition:

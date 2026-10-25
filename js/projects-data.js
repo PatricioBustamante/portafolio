@@ -175,7 +175,7 @@ window.PROJECTS = {
     },
 
     embeds: [
-      'https://embed.figma.com/design/ZuAdzH4NYtO1B24RbePyO7/Portafolio-Docs?node-id=37-34153&embed-host=share" allowfullscreen'
+      'https://embed.figma.com/design/ZuAdzH4NYtO1B24RbePyO7/Portafolio-Docs?node-id=37-34153&embed-host=share'
     ],
 
     metrics: [

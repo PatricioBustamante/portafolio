@@ -785,18 +785,6 @@ const finePointer = window.matchMedia('(pointer: fine)');
 // i18n helper (PB_I18N se carga antes que bundle.js)
 const t = k => (window.PB_I18N ? window.PB_I18N.t(k) : k);
 
-// ===== Disable browser zoom (keyboard + scroll) =====
-// Bloquea Ctrl/Cmd + "+", "-" y "0" para que el diseño no se desarme con zoom de teclado.
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey || e.metaKey) {
-    if (['+', '-', '=', '_', '0'].includes(e.key)) e.preventDefault();
-  }
-}, { passive: false });
-// Bloquea el zoom con Ctrl + rueda del mouse.
-document.addEventListener('wheel', e => {
-  if (e.ctrlKey) e.preventDefault();
-}, { passive: false });
-
 // ===== Loader =====
 const loaderBar = document.getElementById('loaderBar');
 const loader = document.getElementById('loader');

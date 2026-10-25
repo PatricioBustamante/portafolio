@@ -154,7 +154,9 @@ for (const [slug, p] of visible) {
     .replace(/<title[^>]*>[^<]*<\/title>/, `<title>${text(title)}</title>`)
     .replace(/(<meta name="description")[^>]*>/, `$1 content="${attr(desc)}">`)
     .replace('data-pj="hero-title"></h1>', `data-pj="hero-title">${text(es(p.heroTitle) || es(p.title))}</h1>`)
-    .replace('data-pj="summary"></p>', `data-pj="summary">${text(desc)}</p>`);
+    .replace('data-pj="summary"></p>', `data-pj="summary">${text(desc)}</p>`)
+    .replace('data-pj="challenge-title"></h2>', `data-pj="challenge-title">${text(es(p.challengeTitle) || 'Desafío')}</h2>`)
+    .replace('data-pj="analysis-title"></h2>', `data-pj="analysis-title">${text(es(p.analysisTitle) || 'Análisis')}</h2>`);
 
   fs.writeFileSync(`pages/${slug}.html`, html);
 }
